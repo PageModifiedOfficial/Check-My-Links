@@ -1,0 +1,17 @@
+{
+   "background_page": "background.html",
+   "browser_action": {
+      "default_icon": "weeicon.png",
+      "default_title": "Check my links"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": ["check.js"],
+      "matches": [ "http://*/*", "https://*/*" ]
+   } ],
+   "description": "Check My Links is a link checker that crawls through your webpage and looks for broken links.",
+    "icons": { "128": "icon.png" },
+   "name": "Check My Links",
+   "permissions": [ "tabs", "http://*/*", "https://*/*" ],
+   "version": "2.3.3"
+}
