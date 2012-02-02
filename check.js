@@ -1,5 +1,5 @@
 // Check My Links by Paul Livingstone
-// @happenchance
+// @ocodia
 
 String.prototype.startsWith = function(text) {
   return this.substr(0, text.length) == text;

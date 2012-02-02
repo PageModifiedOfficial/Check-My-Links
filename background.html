@@ -2,7 +2,7 @@
 <head>
 <script type="text/javascript">
     
-    var logging = true;
+    var logging = false;
 
     chrome.extension.onRequest.addListener(onRequest);
 
@@ -22,6 +22,7 @@
             if (getItem("blacklist") === null) {
                 setItem("blacklist", blacklistDefaults);
             }
+
             var blacklist = getItem("blacklist");
 
             chrome.tabs.sendRequest(tab.id, {bl:blacklist}, function (response) {

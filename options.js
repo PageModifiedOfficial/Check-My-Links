@@ -1,6 +1,5 @@
-// Check My Links
-// Paul Livingstone
-// 2012
+// Check My Links by Paul Livingstone
+// @ocodia
 
 var blacklistDefaults = 
     "googleleads.g.doubleclick.net\n" +
@@ -13,16 +12,13 @@ var blacklistDefaults =
 
 function loadOptions() {
   
-  // Load up the background page
   var bkg = chrome.extension.getBackgroundPage();
-  
-	var blacklistItems = bkg.getItem("blacklist");
+  var blacklistItems = bkg.getItem("blacklist");
 
-	// Set up the defaults if no values are present in LocalStorage
-	if (blacklistItems === null) {
+  if (blacklistItems === null) {
     bkg.setItem("blacklist", blacklistDefaults);
 	}
-    
+
   blacklistItems = bkg.getItem("blacklist");
   blacklistItems.split(" ");
 
