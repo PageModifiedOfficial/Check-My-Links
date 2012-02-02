@@ -17,7 +17,7 @@ function loadOptions() {
 
   if (blacklistItems === null) {
     bkg.setItem("blacklist", blacklistDefaults);
-	}
+  }
 
   blacklistItems = bkg.getItem("blacklist");
   blacklistItems.split(" ");
