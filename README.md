@@ -22,7 +22,7 @@ https://github.com/ocodia/Check-My-Links/issues
 
 ### Payback
 
-If you use this extension regularly, please contribute a few quid to it's development and upkeep.
+If you use this extension regularly, please contribute a few quid to its development and upkeep.
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/474052/Check-My-Links)
 
