@@ -23,8 +23,14 @@ chrome.extension.onRequest.addListener(
   var passed = 0;
   var rpBox;
 
+
   (
   function(pg){
+
+    var blacklist = request.bl;
+    blacklist = blacklist.split("\n");
+
+    var blacklisted;
 
     // Inject Styles and Elements for feedback report
 
@@ -92,17 +98,6 @@ chrome.extension.onRequest.addListener(
     rpBoxQueue.innerHTML = "Queue: 0";
     rpBoxPass.innerHTML = "0";
     rpBoxFail.innerHTML = "0";
-    
-    var blacklist = [
-    "googleleads.g.doubleclick.net",
-    "doubleclick.net",
-    "googleadservices.com",
-    "googlesyndication.com",
-    "adservices.google.com",
-    "appliedsemantics.com"
-    ];
-
-    var blacklisted;
 
     // Run through links, add feedback classes and ignore empty href and non http* links
     for (var i = 0; i < pg.length; i++){
@@ -112,27 +107,28 @@ chrome.extension.onRequest.addListener(
       var rel = link.rel;
       blacklisted = false;
 
-      if (url.length > 0 && url.startsWith('http') && rel != "nofollow"){
+      if (url.length > 0 && url.startsWith('http') && rel !== "nofollow"){
         for (var b = 0; b < blacklist.length; b++)
         {
-          if (url.contains(blacklist[b])){
+          if (blacklist[b] !== "" && url.contains(blacklist[b])){
             blacklisted = true;
           }          
         }
 
         if (blacklisted === true){
-          console.log("Skipping Adsense links");
+          console.log("Skipped (blacklisted): " + url);
           totalvalid -=1;
         }
         else{
           queued +=1;
           link.classList.add("CMY_Link");
           checkURL(url, link);
+          //console.log("Checking:" + url);
         }
 
       }
       else{
-        console.log("Skipping non-links (rel: nofollow or not http/https)");
+        console.log("Skipped: " + url);
         totalvalid -=1;
       }
     }
@@ -172,3 +168,5 @@ chrome.extension.onRequest.addListener(
     sendResponse({});
 
   });
+
+  

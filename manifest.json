@@ -1,4 +1,5 @@
 {
+   "options_page": "options.html",
    "background_page": "background.html",
    "browser_action": {
       "default_icon": "weeicon.png",
@@ -13,5 +14,5 @@
     "icons": { "128": "icon.png" },
    "name": "Check My Links",
    "permissions": [ "tabs", "http://*/*", "https://*/*" ],
-   "version": "2.3.3"
+   "version": "3.0"
 }

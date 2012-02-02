@@ -1,12 +1,31 @@
 <html>
 <head>
 <script type="text/javascript">
+    
+    var logging = true;
 
     chrome.extension.onRequest.addListener(onRequest);
 
     chrome.browserAction.onClicked.addListener(function (tab) {
         chrome.tabs.getSelected(null, function (tab) {
-            chrome.tabs.sendRequest(tab.id, {}, function (response) {});
+
+            var blacklistDefaults = 
+            "googleleads.g.doubleclick.net\n" +
+            "doubleclick.net\n" +
+            "googleadservices.com\n" +
+            "www.googleadservices.com\n" +
+            "googlesyndication.com\n" +
+            "adservices.google.com\n" +
+            "appliedsemantics.com";
+  
+            // Set up the defaults if no values are present in LocalStorage
+            if (getItem("blacklist") === null) {
+                setItem("blacklist", blacklistDefaults);
+            }
+            var blacklist = getItem("blacklist");
+
+            chrome.tabs.sendRequest(tab.id, {bl:blacklist}, function (response) {
+            });
         });
     });
 
@@ -18,6 +37,7 @@
         }
     }
 
+    // Timeout for each link is 60+1 seconds
     var timeout = 30000;
     
     function check(url, callback) {
@@ -39,6 +59,49 @@
         }
         
         XMLHttpTimeout=setTimeout(function (){return callback(408); xhr.abort();}, timeout += 1000);  
+    }
+
+    // OPTIONS: Management
+
+    // OPTIONS: Set items in localstore
+    function setItem(key, value) {
+        try {
+          log("Inside setItem:" + key + ":" + value);
+          window.localStorage.removeItem(key);
+          window.localStorage.setItem(key, value);
+        }catch(e) {
+          log("Error inside setItem");
+          log(e);
+        }
+        log("Return from setItem" + key + ":" +  value);
+    }
+  
+    // OPTIONS: Get items from localstore
+    function getItem(key) {
+        var value;
+        log('Get Item:' + key);
+        try {
+          value = window.localStorage.getItem(key);
+        }catch(e) {
+          log("Error inside getItem() for key:" + key);
+          log(e);
+          value = "null";
+        }
+        log("Returning value: " + value);
+        return value;
+    }
+
+    // OPTIONS: Zap all items in localstore
+    function clearStrg() {
+        log('about to clear local storage');
+        window.localStorage.clear();
+        log('cleared');
+    }
+
+    function log(txt) {
+        if(logging) {
+          console.log(txt);
+        }
     }
 
 </script>
