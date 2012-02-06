@@ -4,7 +4,7 @@ A Chrome Extension which checks links on webpages to see their response codes. T
 
 ### Instructions
 
-See the Wiki for instructions on how to use this extension:
+See the Wiki for instructions:
 
 https://github.com/ocodia/Check-My-Links/wiki
 
