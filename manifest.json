@@ -12,7 +12,9 @@
    } ],
    "description": "Check My Links is a link checker that crawls through your webpage and looks for broken links.",
     "icons": { "128": "icon.png" },
-   "name": "Check My Links",
+   "name": "Check My Links (External)",
    "permissions": [ "tabs", "http://*/*", "https://*/*" ],
-   "version": "3.0"
+   "version": "3.0.2",
+   "update_url": "http://code.ocodia.com/extensions/cml/updates.xml"
+
 }
