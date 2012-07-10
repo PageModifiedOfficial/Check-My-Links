@@ -10,9 +10,9 @@ String.prototype.contains = function(text) {
 };
 
 
-chrome.extension.onRequest.addListener(
+chrome.extension.onMessage.addListener(
 
-  function(request, sender, sendResponse) {
+  function(request, sender) {
 
   // Gather links  
   var pageLinks = document.getElementsByTagName('a');
@@ -140,7 +140,7 @@ chrome.extension.onRequest.addListener(
 
   // Send links to get checked via XHR
   function checkURL(url, link) {
-    chrome.extension.sendRequest({"action": "check", "url": url}, 
+    chrome.extension.sendMessage({"action": "check", "url": url}, 
     function (response) {
       if (response) {
         if (200 <= response && response < 400) {
@@ -165,7 +165,7 @@ chrome.extension.onRequest.addListener(
     });      
   }
     
-    sendResponse({});
+    return true;
 
   });
 

@@ -1,20 +1,16 @@
 {
    "options_page": "options.html",
-   "background_page": "background.html",
    "browser_action": {
       "default_icon": "weeicon.png",
       "default_title": "Check my links"
    },
-   "content_scripts": [ {
-      "all_frames": true,
-      "js": ["check.js"],
-      "matches": [ "http://*/*", "https://*/*" ]
-   } ],
    "description": "Check My Links is a link checker that crawls through your webpage and looks for broken links.",
     "icons": { "128": "icon.png" },
    "name": "Check My Links (External)",
    "permissions": [ "tabs", "http://*/*", "https://*/*" ],
-   "version": "3.0.2",
-   "update_url": "http://code.ocodia.com/extensions/cml/updates.xml"
+   "version": "3.1.0",
+   "manifest_version": 2,
+   "update_url": "http://code.ocodia.com/extensions/cml/updates.xml",
+   "background": { "scripts": ["background.js"] }
 
 }
