@@ -28,5 +28,11 @@ If you use this extension regularly, please contribute a few quid to its develop
 
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/474052/Check-My-Links)
 
+### License
+
+Check My Links is released under the MIT license. 
+
+www.opensource.org/licenses/MIT
+
 Thanks
 
