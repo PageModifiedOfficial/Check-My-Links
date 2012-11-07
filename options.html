@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>Check My Links: Options</title>
-	<script type="text/javascript" src="options.js"></script>
+	
   <style rel="stylesheet" type="text/css">
   
   body{
@@ -118,7 +118,7 @@
   </style>
   
 </head>
-<body onload="loadOptions()">
+<body>
 <div id="content">
 	<h1 id="logo">Check My Links: Options</h1>
     <p>To prevent this extension from checking a link, please enter all or part of the URL in the blacklist below. Each URL must be entered on a new line.</p>
@@ -126,7 +126,7 @@
     <label for="blacklistEntries">Exclude links from these domains:</label><br/>
     <textarea name="blacklistEntries" id="blacklistEntries" rows="2" cols="20"></textarea>
     <div class="buttons">
-    <button onclick="saveOptions()">Save my preferences</button></div>
+    <button id="save">Save my preferences</button></div>
     <div id="msg" style="visibility: hidden;">Preferences Saved!</div>
     <div id="support">
       <p>Support this extension by contributing towards its upkeep: </p><p><a href="http://flattr.com/thing/474052/Check-My-Links" target="_blank">
@@ -137,5 +137,7 @@
   <div class="footer">
     <a href="http://ocodia.com">By Paul Livingstone</a> - <a href="http://twitter.com/ocodia">@ocodia</a> - <a href="https://github.com/ocodia/Check-My-Links/wiki">Wiki</a> - <a href="https://github.com/ocodia/Check-My-Links/issues">Report an issue</a> - <a href="https://github.com/ocodia/Check-My-Links">Fork me on Github</a>
   </div>
+
+  <script src="options.js"></script>
 </body>
 </html>

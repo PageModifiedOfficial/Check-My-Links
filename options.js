@@ -35,3 +35,7 @@ function saveOptions() {
   document.getElementById("msg").style.visibility = "visible";
 }
 
+
+document.querySelector('#save').addEventListener('click', saveOptions);
+
+loadOptions();
