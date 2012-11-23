@@ -115,6 +115,27 @@
     border-top: 1px dashed #DDD;
 
   }
+
+
+  .option_row{
+  clear:left;
+  }
+  
+  .option_name{
+  float:left;
+  font-weight:bold;
+  margin-top:3px;
+  }
+  
+  .option_picker{
+  float:left
+  }
+
+  hr{
+border: 1px solid #EEE;
+border-bottom: none;
+margin: 10px 0px;
+  }
   </style>
   
 </head>
@@ -125,6 +146,19 @@
     <p style="line-height: 26px">For example: <span>www.mydomain.com</span> will prevent the following links from being checked: <span>www.mydomain.com/page1.html</span> or <span>www.mydomain.com/page2.html</span></p>
     <label for="blacklistEntries">Exclude links from these domains:</label><br/>
     <textarea name="blacklistEntries" id="blacklistEntries" rows="2" cols="20"></textarea>
+    <hr/>
+     <div class="option_row">
+  <div class="option_name">
+  <label for="requestType">Request Type:</label> </div>
+  <div class="option_picker">
+  <select id="requestType">
+    <option value="HEAD">HEAD</option>
+    <option value="GET">GET</option>
+  </select>
+    </div>
+    </div>
+    <p style="clear:both;">HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, switch to GET if you're getting weird results.</p>
+    <hr/>
     <div class="buttons">
     <button id="save">Save my preferences</button></div>
     <div id="msg" style="visibility: hidden;">Preferences Saved!</div>

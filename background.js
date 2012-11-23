@@ -1,4 +1,5 @@
 var logging = false;
+var checkType;
 
 chrome.extension.onMessage.addListener(onRequest);
 
@@ -13,12 +14,20 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         "adservices.google.com\n" +
         "appliedsemantics.com";
 
+        var checkTypeDefault = "HEAD";
+
         // Set up the defaults if no values are present in LocalStorage
         if (getItem("blacklist") === null) {
             setItem("blacklist", blacklistDefaults);
         }
 
+        if(getItem("checkType") == null){
+          setItem("checkType", checkTypeDefault);
+        }
+       
+
         var blacklist = getItem("blacklist");
+        checkType = getItem("checkType");
 
         chrome.tabs.sendMessage(tab.id, {bl:blacklist});
     });
@@ -47,7 +56,7 @@ function check(url, callback) {
     };
 
     try {
-      xhr.open("HEAD", url, true);
+      xhr.open(checkType, url, true);
       xhr.send();
     }
     catch(e){
