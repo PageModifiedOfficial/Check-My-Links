@@ -27,7 +27,9 @@ function loadOptions() {
   }
 
   //blacklistItems = bkg.getItem("blacklist");
-  blacklistItems.split(" ");
+  if(blacklistItems !== null){
+    blacklistItems.split(" ");
+  }
 
   document.getElementById("blacklistEntries").value = blacklistItems;
   var requestType = document.getElementById("requestType");
