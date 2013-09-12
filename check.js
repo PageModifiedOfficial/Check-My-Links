@@ -107,7 +107,7 @@ chrome.extension.onMessage.addListener(
       var rel = link.rel;
       blacklisted = false;
 
-      if (url.length > 0 && url.startsWith('http') && rel !== "nofollow" && !url.contains('logout')){
+      if (url.length > 0 && url.startsWith('http') && rel !== "nofollow" && !url.contains('logout') && !url.contains('Logout'){
         for (var b = 0; b < blacklist.length; b++)
         {
           if (blacklist[b] !== "" && url.contains(blacklist[b])){
