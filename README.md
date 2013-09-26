@@ -1,6 +1,6 @@
 ## Check My Links
 
-A Chrome Extension which checks links on webpages to see their response codes. This allows web content editors to quickly see which links are broken (for whatever reason) and which resolve correctly.
+A Chrome Extension which checks links on webpages and shows their HTTP response codes. This allows web content editors to quickly see which links are broken (for whatever reason) and which resolve correctly.
 
 ### Instructions
 
@@ -10,9 +10,7 @@ https://github.com/ocodia/Check-My-Links/wiki
 
 You can install a packaged version of this extension here:
 
-http://bit.ly/dVb8eK (Google Web Store - currently unavailable)
-
-http://code.ocodia.com/extensions/cml/cml.crx
+https://chrome.google.com/webstore/detail/check-my-links/ojkcdipcgfaekbeaelaapakgnjflfglf
 
 If you want to contact me regarding this extension you can ping me on Twitter: http://twitter.com/ocodia 
 
