@@ -123,7 +123,6 @@ chrome.extension.onMessage.addListener(
           queued +=1;
           link.classList.add("CMY_Link");
           checkURL(url, link);
-          //console.log("Checking:" + url);
         }
 
       }
@@ -142,27 +141,29 @@ chrome.extension.onMessage.addListener(
   function checkURL(url, link) {
     chrome.extension.sendMessage({"action": "check", "url": url}, 
     function (response) {
-      if (response) {
-        if (200 <= response && response < 400) {
-          link.classList.add("CMY_Valid");
-          queued -=1;
-          passed +=1;
-          checked +=1;
-          rpBoxPass.innerHTML = passed;
-        }
-        else {
-          console.log("Response " + response + ": " + url);
-          link.classList.add("CMY_Invalid");
-          link.innerHTML += "&nbsp;<span class='CMY_Response'>" + response + "</span>";
-          queued -=1;
-          invalid +=1;
-          checked += 1;
-          rpBoxFail.innerHTML = invalid;
-        }
-        rpBoxPerc.innerHTML = Math.round((checked)/totalvalid * 100) + "%";
-        rpBoxQueue.innerHTML = "Queue: " + queued;
-      }
+      updateDisplay(url,link,response);
     });      
+  }
+
+  function updateDisplay(url,link,response){
+    if (response) {
+      if (200 <= response && response < 400) {
+        link.classList.add("CMY_Valid");
+        passed +=1;
+        rpBoxPass.innerHTML = passed;
+      }
+      else {
+        console.log("Response " + response + ": " + url);
+        link.classList.add("CMY_Invalid");
+        link.innerHTML += "&nbsp;<span class='CMY_Response'>" + response + "</span>";
+        invalid +=1;
+        rpBoxFail.innerHTML = invalid;
+      }
+      queued -=1;
+      checked +=1;
+      rpBoxPerc.innerHTML = Math.round((checked)/totalvalid * 100) + "%";
+      rpBoxQueue.innerHTML = "Queue: " + queued;
+    }
   }
     
     return true;

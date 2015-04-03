@@ -1,36 +1,34 @@
 // Check My Links by Paul Livingstone
 // @ocodia
 
-var blacklistDefaults = 
-    "googleleads.g.doubleclick.net\n" +
-    "doubleclick.net\n" +
-    "googleadservices.com\n" +
-    "www.googleadservices.com\n" +
-    "googlesyndication.com\n" +
-    "adservices.google.com\n" +
-    "appliedsemantics.com";
-
-var checkTypeDefault = "HEAD";    
-
 function loadOptions() {
   
   var bkg = chrome.extension.getBackgroundPage();
   var blacklistItems = bkg.getItem("blacklist");
   var checkTypeSelection = bkg.getItem("checkType");
+  var cache = bkg.getItem("cache");
 
   if (blacklistItems === null) {
-    bkg.setItem("blacklist", blacklistDefaults);
+    bkg.setItem("blacklist", bkg.blacklistDefaults);
+    blacklistItems = bkg.getItem("blacklist");
   }
 
   if (checkTypeSelection === null) {
-    bkg.setItem("checkType", checkTypeDefault);
+    bkg.setItem("checkType", bkg.checkTypeDefault);
+    checkTypeSelection = bkg.getItem("checkType");
+  }
+  if (cache === null) {
+    bkg.setItem("cache", bkg.cacheDefault);
+    cache = bkg.getItem("cache");
   }
 
-  //blacklistItems = bkg.getItem("blacklist");
   if(blacklistItems !== null){
     blacklistItems.split(" ");
   }
 
+  if(cache == 'true'){
+    document.getElementById("cache").checked = true;
+  }
   document.getElementById("blacklistEntries").value = blacklistItems;
   var requestType = document.getElementById("requestType");
  
@@ -48,13 +46,22 @@ function saveOptions() {
   var bkg = chrome.extension.getBackgroundPage();
   var blacklistEntries = document.getElementById("blacklistEntries");
   var requestType = document.getElementById("requestType");
+  var cache = 'false';
+  if(document.getElementById("cache").checked){
+    cache = 'true';
+  }
   // Save selected options to localstore
   bkg.setItem("blacklist", blacklistEntries.value);
   bkg.setItem("checkType", requestType.children[requestType.selectedIndex].value);
+  bkg.setItem("cache", cache);
   document.getElementById("msg").style.visibility = "visible";
 }
+function deleteObjectStore(){
+  indexedDBHelper.deleteObjectStore();
+  console.log("Cleared IndexedDB Datastore");
+}
 
-
-document.querySelector('#save').addEventListener('click', saveOptions);
+document.getElementById('save').addEventListener('click', saveOptions);
+document.getElementById('clearCache').addEventListener('click', deleteObjectStore);
 
 loadOptions();
