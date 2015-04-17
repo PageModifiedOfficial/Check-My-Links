@@ -137,7 +137,6 @@ border-bottom: none;
 margin: 10px 0px;
   }
   </style>
-  
 </head>
 <body>
 <div id="content">
@@ -159,6 +158,9 @@ margin: 10px 0px;
     </div>
     <p style="clear:both;">HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, switch to GET if you're getting weird results.</p>
 
+    <hr/>
+    Cache results:<input type="checkbox" name="cache" id="cache" value="1"><br />
+    <button id="clearCache">Clear Cache</button>
     <hr/>
     <div id="support">
       <p>Support this extension by contributing towards its upkeep, every little donation helps: </p>
@@ -186,7 +188,7 @@ margin: 10px 0px;
   <div class="footer">
     <a href="http://ocodia.com">By Paul Livingstone</a> - <a href="http://twitter.com/ocodia">@ocodia</a> - <a href="https://github.com/ocodia/Check-My-Links/wiki">Wiki</a> - <a href="https://github.com/ocodia/Check-My-Links/issues">Report an issue</a> - <a href="https://github.com/ocodia/Check-My-Links">Fork me on Github</a>
   </div>
-
+  <script src="db.js"></script>
   <script src="options.js"></script>
 </body>
 </html>

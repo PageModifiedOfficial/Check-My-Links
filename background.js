@@ -1,11 +1,6 @@
 var logging = false;
 var checkType;
-
-chrome.extension.onMessage.addListener(onRequest);
-
-chrome.browserAction.onClicked.addListener(function (tab) {
-    chrome.tabs.executeScript(tab.id, {file:'check.js'}, function () {
-        var blacklistDefaults = 
+var blacklistDefaults = 
         "googleleads.g.doubleclick.net\n" +
         "doubleclick.net\n" +
         "googleadservices.com\n" +
@@ -14,8 +9,12 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         "adservices.google.com\n" +
         "appliedsemantics.com";
 
-        var checkTypeDefault = "HEAD";
+var checkTypeDefault = "HEAD";
+var cacheDefault = "false";
+chrome.extension.onMessage.addListener(onRequest);
 
+chrome.browserAction.onClicked.addListener(function (tab) {
+    chrome.tabs.executeScript(tab.id, {file:'check.js'}, function () {
         // Set up the defaults if no values are present in LocalStorage
         if (getItem("blacklist") === null) {
             setItem("blacklist", blacklistDefaults);
@@ -25,7 +24,9 @@ chrome.browserAction.onClicked.addListener(function (tab) {
           setItem("checkType", checkTypeDefault);
         }
        
-
+        if(getItem("cache") == null){
+          setItem("cache", cacheDefault);
+        }
         var blacklist = getItem("blacklist");
         checkType = getItem("checkType");
 
@@ -36,7 +37,27 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 function onRequest(request, sender, callback) {
     if (request.action == "check") {
         if (request.url) {
-            check(request.url, callback);
+            if (getItem("cache")=='true'){
+                indexedDBHelper.getLink(request.url).then(function(link){
+                    if(typeof(link) != "undefined" && link.status==200){
+                        log("found");
+                        log(link);
+                        return callback(link.status);
+                    }
+                    else{
+                        check(request.url, callback);
+                        log("not in db");
+                        log(request.url);
+                        log("added");
+                    }
+                }, function(err){
+                    log(err);
+                });
+            }
+            else{
+                // do not use cache
+                check(request.url, callback);
+            }
         }
     }
     return true;
@@ -51,6 +72,9 @@ function check(url, callback) {
     xhr.onreadystatechange = function (data) {
         if (xhr.readyState == 4) {
             clearTimeout(XMLHttpTimeout);
+            if (getItem("cache")=='true' && xhr.status==200){
+                indexedDBHelper.addLink(url, xhr.status);
+            }
             return callback(xhr.status);
         }
     };
