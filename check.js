@@ -120,9 +120,14 @@ chrome.extension.onMessage.addListener(
           totalvalid -=1;
         }
         else{
+          if(url.indexOf("#")==url.length-1){
+            totalvalid -=1;
+          }
+          else{
           queued +=1;
           link.classList.add("CMY_Link");
-          checkURL(url, link);
+          checkURL(url, link); 
+          }
         }
 
       }
