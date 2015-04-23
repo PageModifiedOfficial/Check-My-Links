@@ -129,12 +129,16 @@ chrome.extension.onMessage.addListener(
       var rel = link.rel;
       blacklisted = false;
 
-      if (url.length > 0 && url.startsWith('http') && rel !== "nofollow"){
+      if ((url.length <= 0) || (request.nf=='false' && rel == "nofollow") || (url.startsWith('http')===false)){
+        console.log("Skipped: " + url);
+        totalvalid -=1;
+      }
+      else{
         for (var b = 0; b < blacklist.length; b++)
         {
           if (blacklist[b] !== "" && url.contains(blacklist[b])){
             blacklisted = true;
-          }          
+          }
         }
 
         if (blacklisted === true){
@@ -151,11 +155,6 @@ chrome.extension.onMessage.addListener(
           checkURL(url, link); 
           }
         }
-
-      }
-      else{
-        console.log("Skipped: " + url);
-        totalvalid -=1;
       }
     }
     

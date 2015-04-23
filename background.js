@@ -11,6 +11,7 @@ var blacklistDefaults =
 
 var checkTypeDefault = "HEAD";
 var cacheDefault = "false";
+var noFollowDefault = "false";
 chrome.extension.onMessage.addListener(onRequest);
 
 chrome.browserAction.onClicked.addListener(function (tab) {
@@ -28,9 +29,11 @@ chrome.browserAction.onClicked.addListener(function (tab) {
           setItem("cache", cacheDefault);
         }
         var blacklist = getItem("blacklist");
+        var nofollow = getItem("noFollow");
         checkType = getItem("checkType");
 
-        chrome.tabs.sendMessage(tab.id, {bl:blacklist});
+
+        chrome.tabs.sendMessage(tab.id, {bl:blacklist,nf:nofollow});
     });
 });
 
