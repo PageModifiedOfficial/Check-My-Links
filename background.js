@@ -1,6 +1,6 @@
 var logging = false;
 var checkType;
-var blacklistDefaults = 
+var blacklistDefaults =
         "googleleads.g.doubleclick.net\n" +
         "doubleclick.net\n" +
         "googleadservices.com\n" +
@@ -24,7 +24,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         if(getItem("checkType") == null){
           setItem("checkType", checkTypeDefault);
         }
-       
+
         if(getItem("cache") == null){
           setItem("cache", cacheDefault);
         }
@@ -44,7 +44,7 @@ function onRequest(request, sender, callback) {
         if (request.url) {
             if (getItem("cache")=='true'){
                 indexedDBHelper.getLink(request.url).then(function(link){
-                    if(typeof(link) != "undefined" && link.status==200){
+                    if(typeof(link) != "undefined" && (200 <= link.status && link.status < 400)){  
                         log("found");
                         log(link);
                         return callback(link.status);
@@ -114,8 +114,8 @@ function check(url, callback) {
     catch(e){
       console.log(e);
     }
-    
-    XMLHttpTimeout=setTimeout(function (){return callback(408); xhr.abort();}, timeout += 1000);  
+
+    XMLHttpTimeout=setTimeout(function (){return callback(408); xhr.abort();}, timeout += 1000);
 }
 
 // OPTIONS: Management
@@ -160,4 +160,3 @@ function log(txt) {
       console.log(txt);
     }
 }
-

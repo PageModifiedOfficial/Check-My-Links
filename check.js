@@ -5,8 +5,8 @@ String.prototype.startsWith = function(text) {
   return this.substr(0, text.length) == text;
 };
 
-String.prototype.contains = function(text) { 
-  return this.indexOf(text) !== -1; 
+String.prototype.contains = function(text) {
+  return this.indexOf(text) !== -1;
 };
 function removeClassFromElements(classname) {
   var x = document.getElementsByClassName(classname);
@@ -33,7 +33,7 @@ chrome.extension.onMessage.addListener(
 
   function doStuff(request, sender) {
 
-  // Gather links  
+  // Gather links
   var pageLinks = document.getElementsByTagName('a');
   var totalvalid = pageLinks.length;
   var queued = 0;
@@ -86,7 +86,7 @@ chrome.extension.onMessage.addListener(
     reportStyle.appendChild(document.createTextNode("#CMY_ReportBox #CMY_RB_Options{border-top: 1px solid #333; color: #fff; background: #000; clear:both;}"));
     reportStyle.appendChild(document.createTextNode("#CMY_ReportBox #CMY_RB_Settings {float: left; }"));
     reportStyle.appendChild(document.createTextNode("#CMY_ReportBox #CMY_RB_Settings a {width: 13px; height: 13px; display: block; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEHSURBVHjafNFNS4JBEMDxLYokJb0mSAlKRlAQqPc+QkJE9xQ8Cn0G6e5V6BpBFn2EDnaPDh4qT3rKgygKWdt/ccaX5aGB32F3ntmdZ9ZYa02ACj5wFJRfM9NI4wRNDHCKJM7xhT3E8Yi+VpftNN6Exhgv6KKvN2vRIV7t/1FHxH2/Ku31sGLm8Y4naVVjMltTeYVn/MiJLeQQwyV+ZX+Ie5y5oo7XxgNC0nZK/kVjgoZLHOMaI0m4j0rYR22h4FP2kzqIKJrejQNvXdV30kHksWOWI+ytc/JWs8dNIIQbfONCitq4Q1YOjaGj7W3hAJvYkGG4qRUlv40M1hcf11fALXaD8n8CDAA06afD6OE/sAAAAABJRU5ErkJggg==);}"));
-        
+
     var reportBox = document.createElement("div");
     var rbHeader = document.createElement("div");
     //var rbPerc = document.createElement("div");
@@ -103,18 +103,18 @@ chrome.extension.onMessage.addListener(
     var rbSettings = document.createElement("div");
     rbSettings.innerHTML = "<a href='" + optURL + "' target='_blank'></a>";
     rbSettings.setAttribute("id", "CMY_RB_Settings");
-    
+
     reportBox.setAttribute("id", "CMY_ReportBox");
     rbHeader.setAttribute("id", "CMY_RB_Header");
     rbHeader.innerHTML = "Link Results";
     //rbPerc.setAttribute("id", "CMY_RB_Perc");
-    
+
     rbAmt.setAttribute("id", "CMY_RB_LC_Left");
     rbAmt.setAttribute("class", "CMY_RB_LC_Left CMY_RB_Meta");
-    
+
     rbQueue.setAttribute("id", "CMY_RB_LC_Right");
     rbQueue.setAttribute("class", "CMY_RB_LC_Right CMY_RB_Meta CMY_RB_Queue");
-    
+
     rbPass.setAttribute("id", "CMY_RB_Pass");
     rbPass.setAttribute("class", "CMY_RB_ResultCount");
     rbFail.setAttribute("id", "CMY_RB_Fail");
@@ -130,7 +130,7 @@ chrome.extension.onMessage.addListener(
     rbOption2.setAttribute("class", "CMY_RB_LC_Right CMY_RB_Meta");
     rbOption2.innerHTML = "Method: " + checkType;
     rbOptions.appendChild(rbOption2);
-    
+
     document.getElementsByTagName("body")[0].appendChild(reportBox);
     rpBox = document.getElementById("CMY_ReportBox");
 
@@ -150,7 +150,7 @@ chrome.extension.onMessage.addListener(
     rpBoxQueue = document.getElementById("CMY_RB_LC_Right");
     rpBoxPass = document.getElementById("CMY_RB_Pass");
     rpBoxFail = document.getElementById("CMY_RB_Fail");
-    
+
     //rpBoxPerc.innerHTML = "0%";
     rpBoxAmt.innerHTML = "Links: 0";
     rpBoxQueue.innerHTML = "Queue: 0";
@@ -193,13 +193,13 @@ chrome.extension.onMessage.addListener(
           else{
           queued +=1;
           link.classList.add("CMY_Link");
-          checkURL(url, link); 
+          checkURL(url, link);
           }
         }
       }
     }
 
-    
+
     rpBoxAmt.innerHTML = "Links: " + totalvalid;
     // When close element is clicked, hide UI
     document.getElementById("CMY_RB_Close").onclick=function(){removeDOMElement("CMY_ReportBox");};
@@ -210,10 +210,10 @@ chrome.extension.onMessage.addListener(
 
   // Send links to get checked via XHR
   function checkURL(url, link) {
-    chrome.extension.sendMessage({"action": "check", "url": url}, 
+    chrome.extension.sendMessage({"action": "check", "url": url},
     function (response) {
       updateDisplay(url,link,response);
-    });      
+    });
   }
 
   function updateDisplay(url,link,response){
@@ -225,20 +225,18 @@ chrome.extension.onMessage.addListener(
       }
       else {
         console.log("Response " + response + ": " + url);
-        link.classList.add("CMY_Invalid");  
+        link.classList.add("CMY_Invalid");
     	link.innerHTML += " <span class='CMY_Response'>" + response + "</span>";
         invalid +=1;
         rpBoxFail.innerHTML = invalid;
       }
       queued -=1;
       checked +=1;
-      //rpBoxPerc.innerHTML = Math.round((checked)/totalvalid * 100) + "%";
+      //rpBoxPerc.innerHTML = Math.floor((checked)/totalvalid * 100) + "%";
       rpBoxQueue.innerHTML = "Queue: " + queued;
     }
   }
-    
+
     return true;
 
   });
-
-  
