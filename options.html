@@ -2,195 +2,214 @@
 <head>
 	<title>Check My Links: Options</title>
 	
-  <style rel="stylesheet" type="text/css">
-  
-  body{
-    background-color:#eee;
-    font-family:arial,sans-serif;
-    font-size:13px
-  }
-  
-  #content{
-    background-color: white;
-    border: 1px solid #DDD;
-    margin: 40px auto 20px;
-    padding: 12px;
-    width: 500px;
-    -webkit-border-radius: 12px;
-    box-shadow: 0px 0px 10px #ddd;
-  }
-  
-  h1{
-    color:#333333;
-    font-size:1.5em;
-    margin:0.7em 0 0;
-  }
+	<style rel="stylesheet" type="text/css">
+
+		body{
+			background-color:#eee;
+			font-family:arial,sans-serif;
+			font-size:13px
+		}
+
+		#content{
+			background-color: white;
+			border: 1px solid #DDD;
+			margin: 40px auto 20px;
+			padding: 12px;
+			width: 500px;
+			-webkit-border-radius: 12px;
+			box-shadow: 0px 0px 10px #ddd;
+		}
+
+		h1{
+			color:#333333;
+			font-size:1.5em;
+			margin:0.7em 0 0;
+		}
 
 
-  p{
-    font-size: 12px;
-  }
-  
-  .buttons{
-    clear:left;
-    padding:5px;
-    text-align: center;
-  }
-  
-  #save_status{
-    background-color:#fff1a8;
-    font-weight:bold;
-    margin-left:10px;
-    opacity:0;
-    padding:3px;
-    border-radius:3px
-  }
-  
-  .footer{
-    text-align:center;
-    margin-top:0.4em;
-    color: rgba(0,0,0,0.2);
-  }
+		p{
+			font-size: 12px;
+		}
 
-  .footer a{
-    color: #333;
-    text-shadow: 1px 1px 1px white;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    padding: 5px;
-    background: -webkit-gradient(linear, center top, center bottom, from(white), to(#fafafa));
-    border-radius: 5px;
-  }
+		.buttons{
+			clear:left;
+			padding:5px;
+			text-align: center;
+		}
 
-  .footer a:hover{
-    color: #111;
-    text-shadow: 1px 1px 1px white;
-    text-decoration: underline;
-  }
-  
-  #msg{
-    background: #090;
-    border-radius: 5px 5px;
-    color: #fff;
-    font-weight: bold;
-    padding: 5px;
-    text-align: center;
-  }
+		#save_status{
+			background-color:#fff1a8;
+			font-weight:bold;
+			margin-left:10px;
+			opacity:0;
+			padding:3px;
+			border-radius:3px
+		}
 
-  #blacklistEntries{
-    width: 500px;
-    height: 200px;
-  }
+		.footer{
+			text-align:center;
+			margin-top:0.4em;
+			color: rgba(0,0,0,0.2);
+		}
 
-  #logo{
-    background: -webkit-gradient(linear, center top, center bottom, from(white), to(#EEE));
-    padding: 15px 0px 10px 10px;
-    height: 30px;
-    border-bottom: 1px solid #DDD;
-    margin: -12px -12px 20px -12px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    text-shadow: 1px 1px 1px white;
-    color: #666;
-  }
+		.footer a{
+			color: #333;
+			text-shadow: 1px 1px 1px white;
+			text-decoration: none;
+			border: 1px solid #ddd;
+			padding: 5px;
+			background: -webkit-gradient(linear, center top, center bottom, from(white), to(#fafafa));
+			border-radius: 5px;
+		}
 
-  span{
-    font-family: monospace;
-    background: #D9EDF7;
-    padding: 3px;
-    color: #3A87AD;
-    border-radius: 5px;
-  }
+		.footer a:hover{
+			color: #111;
+			text-shadow: 1px 1px 1px white;
+			text-decoration: underline;
+		}
 
-  label{
-    font-weight: bold;
-  }
-
-  #support{
-    margin: 0px -12px 10px -12px;
-    background: #fff;
-    padding: 0px 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    text-align: center;
-
-  }
+		#msg, #msgCache{
+			background: #090;
+			border-radius: 5px 5px;
+			color: #fff;
+			font-weight: bold;
+			padding: 5px;
+			text-align: center;
+		}
 
 
-  .option_row{
-  clear:left;
-  }
-  
-  .option_name{
-  float:left;
-  font-weight:bold;
-  margin-top:3px;
-  }
-  
-  .option_picker{
-  float:left
-  }
+		#blacklistEntries{
+			width: 500px;
+			height: 200px;
+		}
 
-  hr{
-border: 1px solid #EEE;
-border-bottom: none;
-margin: 10px 0px;
-  }
-  </style>
+		#logo{
+			background: -webkit-gradient(linear, center top, center bottom, from(white), to(#EEE));
+			padding: 15px 0px 10px 10px;
+			height: 30px;
+			border-bottom: 1px solid #DDD;
+			margin: -12px -12px 20px -12px;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			text-shadow: 1px 1px 1px white;
+			color: #666;
+		}
+
+		span{
+			font-family: monospace;
+			background: #D9EDF7;
+			padding: 3px;
+			color: #3A87AD;
+			border-radius: 5px;
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		#support{
+			margin: 0px -12px 10px -12px;
+			background: #fff;
+			padding: 0px 10px;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+			text-align: center;
+
+		}
+
+
+		.option_row{
+			clear:left;
+		}
+
+		.option_name{
+			float:left;
+			font-weight:bold;
+			margin-top:3px;
+		}
+
+		.option_picker{
+			float:left
+		}
+
+		hr{
+			border: 1px solid #EEE;
+			border-bottom: none;
+			margin: 10px 0px;
+		}
+	</style>
 </head>
 <body>
-<div id="content">
-	<h1 id="logo">Check My Links: Options</h1>
-    <p>To prevent this extension from checking a link, please enter all or part of the URL in the blacklist below. Each URL must be entered on a new line.</p>
-    <p style="line-height: 26px">For example: <span>www.mydomain.com</span> will prevent the following links from being checked: <span>www.mydomain.com/page1.html</span> or <span>www.mydomain.com/page2.html</span></p>
-    <label for="blacklistEntries">Exclude links from these domains:</label><br/>
-    <textarea name="blacklistEntries" id="blacklistEntries" rows="2" cols="20"></textarea>
-    <hr/>
-     <div class="option_row">
-  <div class="option_name">
-  <label for="requestType">Request Type:</label> </div>
-  <div class="option_picker">
-  <select id="requestType">
-    <option value="HEAD">HEAD</option>
-    <option value="GET">GET</option>
-  </select>
-    </div>
-    </div>
-    <p style="clear:both;">HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, switch to GET if you're getting weird results.</p>
+	<div id="content">
+		<h1 id="logo">Check My Links: Options</h1>
+		<p>To prevent this extension from checking a link, please enter all or part of the URL in the blacklist below. Each URL must be entered on a new line.</p>
 
-    <hr/>
-    Cache results:<input type="checkbox" name="cache" id="cache" value="1"><br />
-    <button id="clearCache">Clear Cache</button>
-    <hr/>
-    Follow Links with Rel NoFollow:<input type="checkbox" name="noFollow" id="noFollow" value="1"><br />
-    <hr/>
-    <div id="support">
-      <p>Support this extension by contributing towards its upkeep, every little donation helps: </p>
+		<p style="line-height: 26px">For example: <span>www.mydomain.com</span> will prevent the following links from being checked: <span>www.mydomain.com/page1.html</span> or <span>www.mydomain.com/page2.html</span></p>
 
-<p>
+		<label for="blacklistEntries">Exclude links from these domains:</label><br/>
+		<textarea name="blacklistEntries" id="blacklistEntries" rows="2" cols="20"></textarea>
+		<hr/>
 
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="BDPC3R58JU9F6">
-<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-</form>
+		<label for="requestType">Method of Request: </label> 
 
-</p>
-      <p><a href="http://flattr.com/thing/474052/Check-My-Links" target="_blank">
-      <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></p>
-    </div>
+
+		<select id="requestType">
+			<option value="GET">GET</option>
+			<option value="HEAD">HEAD</option>			
+		</select>
+
+
+		<p>HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, use GET if you're getting weird results.</p>
+
+		<hr/>
+
+		<strong>Valid Link Caching</strong>
+		<p>If you don't want to constantly re-check good (green, HTTP 200) links, enable the option below to force the extension to only check links which were previously broken (red, HTTP 404 etc). Enabling 'Valid Link Caching' vastly reduces the time it will take to repeatedly check a page.</p>
+
+		<label for="cache">Cache Valid Links: </label> <input type="checkbox" name="cache" id="cache" value="1">
+
+		<div class="buttons">
+			<button id="clearCache">Clear Cache</button>
+		</div>
+
+		<div id="msgCache" style="visibility: hidden;">Cache cleared!</div>
+
+		<hr/>
+		<strong>Nofollow Links</strong>
+		<p>By default, Check My Links will not check links with a link rel attribute of 'nofollow', you should apply this attribute to links you don't want the extension to trigger (such as Log Out, Sign Out links etc).</p>
+		    <strong>Check Links with rel="nofollow":<strong> <input type="checkbox" name="noFollow" id="noFollow" value="1"><br />
     <hr/>
-    <div class="buttons">
-    <button id="save">Save my preferences</button></div>
-    <div id="msg" style="visibility: hidden;">Preferences Saved!</div>
-    
-  </div>
 
-  <div class="footer">
-    <a href="http://ocodia.com">By Paul Livingstone</a> - <a href="http://twitter.com/ocodia">@ocodia</a> - <a href="https://github.com/ocodia/Check-My-Links/wiki">Wiki</a> - <a href="https://github.com/ocodia/Check-My-Links/issues">Report an issue</a> - <a href="https://github.com/ocodia/Check-My-Links">Fork me on Github</a>
-  </div>
-  <script src="db.js"></script>
-  <script src="options.js"></script>
-</body>
-</html>
+		<div id="support">
+
+			<p>Support this extension by contributing towards its upkeep, every little donation helps: </p>
+
+			<p>
+
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="BDPC3R58JU9F6">
+					<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+				</form>
+
+			</p>
+
+			<p><a href="http://flattr.com/thing/474052/Check-My-Links" target="_blank">
+				<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></p>
+			</div>
+			<hr/>
+			<div class="buttons">
+				<button id="save">Save my preferences</button>
+			</div>
+			<div id="msg" style="visibility: hidden;">Preferences Saved!</div>
+
+		</div>
+
+		<div class="footer">
+			<a href="http://twitter.com/ocodia">By Paul Livingstone</a> - <a href="https://github.com/ocodia/Check-My-Links/wiki">Wiki</a> - <a href="https://github.com/ocodia/Check-My-Links/issues">Report an issue</a> - <a href="https://github.com/ocodia/Check-My-Links">Fork me on Github</a>
+		</div>
+		<script src="db.js"></script>
+		<script src="options.js"></script>
+	</body>
+	</html>

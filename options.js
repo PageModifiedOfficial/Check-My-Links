@@ -43,7 +43,6 @@ function loadOptions() {
   document.getElementById("blacklistEntries").value = blacklistItems;
   var requestType = document.getElementById("requestType");
  
- // Select the appropriate saved option for TRENDS
   for (var i = 0; i < requestType.children.length; i++) {
     var requestTypechild = requestType.children[i];
       if (requestTypechild.value == checkTypeSelection) {
@@ -77,6 +76,7 @@ function saveOptions() {
 function deleteObjectStore(){
   indexedDBHelper.deleteObjectStore();
   console.log("Cleared IndexedDB Datastore");
+  document.getElementById("msgCache").style.visibility = "visible";
 }
 
 document.getElementById('save').addEventListener('click', saveOptions);

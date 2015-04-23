@@ -9,7 +9,7 @@ var blacklistDefaults =
         "adservices.google.com\n" +
         "appliedsemantics.com";
 
-var checkTypeDefault = "HEAD";
+var checkTypeDefault = "GET";
 var cacheDefault = "false";
 var noFollowDefault = "false";
 chrome.extension.onMessage.addListener(onRequest);
@@ -31,9 +31,11 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         var blacklist = getItem("blacklist");
         var nofollow = getItem("noFollow");
         checkType = getItem("checkType");
+        var cacheType = getItem("cache");
+        var optionsURL = chrome.extension.getURL("options.html");
 
 
-        chrome.tabs.sendMessage(tab.id, {bl:blacklist,nf:nofollow});
+        chrome.tabs.sendMessage(tab.id, {bl:blacklist, ct:checkType, ca:cacheType, op:optionsURL, nf:nofollow});
     });
 });
 
