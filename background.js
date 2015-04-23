@@ -71,16 +71,39 @@ function check(url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function (data) {
         if (xhr.readyState == 4) {
+            log(xhr);
             clearTimeout(XMLHttpTimeout);
-            if (getItem("cache")=='true' && xhr.status==200){
-                indexedDBHelper.addLink(url, xhr.status);
+            if (200 <= xhr.status && xhr.status < 400){
+                // If there is a hashtag in the URL
+                if(url.indexOf("#")!=-1){
+                    var parser = new DOMParser ();
+                    var responseDoc = parser.parseFromString (xhr.responseText, "text/html");
+                    log (responseDoc.getElementById(url.substring(url.indexOf("#")+1,url.length)));
+                    if(responseDoc.getElementById(url.substring(url.indexOf("#")+1,url.length))){
+                        // Element with id that matches hashtag was found
+                        if(getItem("cache")=='true'){
+                            indexedDBHelper.addLink(url, xhr.status);
+                        }
+                        return callback(xhr.status);
+                    }
+                    else{
+                        // Page resolved, but element with id that matches hashtag was not found
+                        return callback(404);
+                    }
+                }
+                else{
+                    // No hashtag
+                    if (getItem("cache")=='true'){
+                        indexedDBHelper.addLink(url, xhr.status);
+                    }
+                }
             }
             return callback(xhr.status);
         }
     };
 
     try {
-      xhr.open(checkType, url, true);
+      xhr.open(getItem("checkType"), url, true);
       xhr.send();
     }
     catch(e){
