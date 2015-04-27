@@ -83,8 +83,9 @@ function check(url, callback) {
                 if(url.indexOf("#")!=-1){
                     var parser = new DOMParser ();
                     var responseDoc = parser.parseFromString (xhr.responseText, "text/html");
-                    log (responseDoc.getElementById(url.substring(url.indexOf("#")+1,url.length)));
-                    if(responseDoc.getElementById(url.substring(url.indexOf("#")+1,url.length))){
+                    var fragID = url.substring(url.indexOf("#")+1,url.length);
+                    log (responseDoc.getElementById(fragID) || responseDoc.getElementsByName(fragID));
+                    if( responseDoc.getElementById(fragID) || responseDoc.getElementsByName(fragID) ){
                         // Element with id that matches hashtag was found
                         if(getItem("cache")=='true'){
                             indexedDBHelper.addLink(url, xhr.status);
