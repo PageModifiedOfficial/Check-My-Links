@@ -28,6 +28,11 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         if(getItem("cache") == null){
           setItem("cache", cacheDefault);
         }
+
+        if(getItem("noFollow") == null){
+          setItem("noFollow", noFollowDefault);
+        }
+
         var blacklist = getItem("blacklist");
         var nofollow = getItem("noFollow");
         checkType = getItem("checkType");
@@ -44,7 +49,7 @@ function onRequest(request, sender, callback) {
         if (request.url) {
             if (getItem("cache")=='true'){
                 indexedDBHelper.getLink(request.url).then(function(link){
-                    if(typeof(link) != "undefined" && (200 <= link.status && link.status < 400)){  
+                    if(typeof(link) != "undefined" && (200 <= link.status && link.status < 400)){
                         log("found");
                         log(link);
                         return callback(link.status);
@@ -85,7 +90,7 @@ function check(url, callback) {
                     var responseDoc = parser.parseFromString (xhr.responseText, "text/html");
                     var fragID = url.substring(url.indexOf("#")+1,url.length);
                     log (responseDoc.getElementById(fragID) || responseDoc.getElementsByName(fragID));
-                    if( responseDoc.getElementById(fragID) || responseDoc.getElementsByName(fragID) ){
+                    if( responseDoc.getElementById(fragID) || responseDoc.getElementsByName(fragID).length > 0 ){
                         // Element with id that matches hashtag was found
                         if(getItem("cache")=='true'){
                             indexedDBHelper.addLink(url, xhr.status);
