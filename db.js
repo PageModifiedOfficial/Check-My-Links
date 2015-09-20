@@ -46,7 +46,6 @@ var indexedDBHelper = function(){
   };
 
   var addLink = function(linkURL,linkstatus) {
-    console.log("addlink");
     //Creating a transaction object to perform read-write operations
     var trans = db.transaction(["links"], "readwrite");
     var store = trans.objectStore("links");

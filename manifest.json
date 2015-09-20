@@ -21,6 +21,5 @@
       ]
     }],
     "web_accessible_resources": ["options.html"],
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'" //For eval in QUnit Sinon testing library
-    // script-src 'self' 'unsafe-inline'; //For blanket, disabled in manifest v2 and will never be re-enabled
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
