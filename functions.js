@@ -13,11 +13,6 @@ String.prototype.rtrim = function(s) {
     return this.replace(new RegExp(s + "*$"),''); 
 };
 
-function OpenInNewTab(url) {
-  var win = window.open(url, '_blank');
-  win.focus();
-}
-
 function removeClassFromElements(classname) {
   var x = document.getElementsByClassName(classname);
   var i;
@@ -43,11 +38,11 @@ function isLinkValid(link,request,blacklist){
   var url = link.href;
   var rel = link.rel;
   var blacklisted = false;
-  if ((request.nf=='false' && rel == "nofollow") || (url.startsWith('http')===false && url.length != 0)){
-    console.log("Skipped: " + url);
+  if (url.startsWith('chrome-extension://')){
     return false;
   }
-  else if (url.startsWith('chrome-extension://')){
+  else if ((request.nf == 'false' && rel == "nofollow") || (url.startsWith('http') === false && url.length != 0)){
+    console.log("Skipped: " + url);
     return false;
   }
   else{
@@ -119,18 +114,21 @@ function createDisplay(optURL,cacheType,checkType){
     innerHTML: "&times;"
   });
   rbExportDiv = create("div", {
-    id: "CMY_RB_Export"
-    // innerHTML: "<a href='" + optURL + "' target='_blank'></a>"
+    id: "CMY_RB_Export",
+    alt: "Export to console in CSV format",
+    title: "Export to console in CSV format"
   });
   rbSettings = create("div", {
     id: "CMY_RB_Settings",
     innerHTML: "<a href='" + optURL + "' target='_blank'></a>"
   });
   rbOption1 = create("div", {
+    id: "CMY_RB_Cache",
     class: "CMY_RB_LC_Left CMY_RB_Meta",
     innerHTML: "Caching: " + cacheType.toString().toUpperCase()
   });
   rbOption2 = create("div", {
+    id: "CMY_RB_RequestType",
     class: "CMY_RB_LC_Right CMY_RB_Meta",
     innerHTML: "Method: " + checkType.toString()
   });
@@ -155,44 +153,44 @@ function createDisplay(optURL,cacheType,checkType){
     if (linkStatus) {
       if (200 <= linkStatus && linkStatus < 400 && warnings.length == 0) {
         link.classList.add("CMY_Valid");
-        passed +=1;
+        passed += 1;
         rbPass.innerHTML = passed;
       }
       else if(200 <= linkStatus && linkStatus < 400 && warnings.length > 0){
         var response;
-        response = "Response " + linkStatus+": " +link.href + " Warning: ";
-        for (var i=0;i<warnings.length;i++)
+        response = "Response " + linkStatus + ": " + link.href + " Warning: ";
+        for (var i = 0; i < warnings.length; i++)
         {
-          response+=warnings[i];
-          if(i<warnings.length-1){
-            response+=",";
+          response += warnings[i];
+          if(i < warnings.length-1){
+            response += ",";
           }
         }
         link.classList.add("CMY_Warning");
-        link.innerHTML += " <span class='CMY_Response'>"+ linkStatus +"</span>";
-        warning +=1;
+        link.innerHTML += " <span class=\"CMY_Response\">"+ linkStatus +"</span>";
+        warning += 1;
         rbWarning.innerHTML = warning; 
         console.log(response);
       }
       else {
         console.log("Response " + linkStatus + ": " + link.href);
         link.classList.add("CMY_Invalid");
-        link.innerHTML += " <span class='CMY_Response'>" + linkStatus + "</span>";
-        invalid +=1;
+        link.innerHTML += " <span class=\"CMY_Response\">" + linkStatus + "</span>";
+        invalid += 1;
         rbFail.innerHTML = invalid;
       }
-      queued -=1;
-      checked +=1;
+      queued -= 1;
+      checked += 1;
       rbQueue.innerHTML = "Queue: " + queued;
     }
   }
   function create(name, props) {
     var el = document.createElement(name);
     for (var p in props){
-      if(p=="innerText"){
+      if(p == "innerText"){
         el.innerText = props[p];
       }
-      else if(p=="innerHTML"){
+      else if(p == "innerHTML"){
         el.innerHTML = props[p];
       }
       else{
@@ -202,9 +200,9 @@ function createDisplay(optURL,cacheType,checkType){
     return el;
 }
 
-function shouldDOMbeParsed(url,parseDOMoption){
-  if(parseDOMoption==="true"){
-    if((url.lastIndexOf("#")>url.lastIndexOf("/")) && (url.lastIndexOf("#")<url.length-1)){
+function shouldDOMbeParsed(url,parseDOMoption, checkTypeOption){
+  if(parseDOMoption === "true" && checkTypeOption == "GET"){
+    if((url.lastIndexOf("#") > url.lastIndexOf("/")) && (url.lastIndexOf("#") < url.length-1)){
       return true;
     }
   }
@@ -238,20 +236,20 @@ function check(url) {
     catch(e){
       console.log(e);
     }
-    XMLHttpTimeout=setTimeout(function (){response.status=408;resolve(response); xhr.abort();}, timeout += 1000);
+    XMLHttpTimeout = setTimeout(function (){response.status = 408;resolve(response); xhr.abort();}, timeout += 1000);
   });
 }
 
 function XHRisNecessary(options,url){
-  if(shouldDOMbeParsed(url,options.parseDOM)===true || options.cache=='false' ){
+  if(shouldDOMbeParsed(url,options.parseDOM,options.checkType) === true || options.cache == 'false'){
     return true;
   }
   return false;
 }
 
 function getTrailingHashWarning(options,link,warnings){
-  if(options.trailingHash=='true'){
-       if(link.href.lastIndexOf("#")==link.href.length-1){
+  if(options.trailingHash == 'true'){
+       if(link.href.lastIndexOf("#") == link.href.length-1){
           warnings.push("Link has a trailing hash");
       }
   }
@@ -260,7 +258,7 @@ function getTrailingHashWarning(options,link,warnings){
 
 function getEmptyLinkWarning(options,link,warnings){
   // link is the outerHTML
-  if(options.emptyLink=='true'){
+  if(options.emptyLink == 'true'){
     if(new RegExp(/(([^>]+href\s*=\s*"\s*?")|([^>]+href\s*=\s*'\s*?'))/i).test(link)){
       warnings.push("Link is empty");
     }
@@ -270,7 +268,7 @@ function getEmptyLinkWarning(options,link,warnings){
 
 // Not utilized yet, would need to allow length 0 to be a valid link and then filter it out from trying to send an XHR request
 function getNoHrefLinkWarning(options,link,warnings){
-  if(options.noHrefAttr=='true'){
+  if(options.noHrefAttr == 'true'){
     if (!link.hasAttribute("href")) {       
       warnings.push("Link does not have an href attribute");
     }
@@ -279,17 +277,17 @@ function getNoHrefLinkWarning(options,link,warnings){
 }
 
 function getParseDOMWarning(options,url,response,warnings){
-  if(options.parseDOM=='true'){
+  if(options.parseDOM == 'true'){
     if(200 <= response.status && response.status < 400){
       var parser = new DOMParser();
       var responseDoc = parser.parseFromString (response.document, "text/html");
       var fragID;
-      if(url.lastIndexOf("#")!== -1 && url.lastIndexOf("#")<url.length-1){
-        fragID = url.substring(url.lastIndexOf("#")+1,url.length);
+      if(url.lastIndexOf("#")!== -1 && url.lastIndexOf("#") < url.length-1){
+        fragID = url.substring(url.lastIndexOf("#") + 1,url.length);
         log("fragID");
         log(fragID);
         log(responseDoc.getElementById(fragID) || responseDoc.getElementsByName(fragID));
-        if( !responseDoc.getElementById(fragID) && !responseDoc.getElementsByName(fragID).length > 0 ){
+        if(!responseDoc.getElementById(fragID) && !responseDoc.getElementsByName(fragID).length > 0){
           warnings.push("Unable to find element to match hashtag");
         }
       }
@@ -354,7 +352,7 @@ function getOption(key){
     // Get Option from LocalStorage
     value = getItem(key);
     // Default the value if it does not exist in LocalStorage and a default value is defined above
-    if ((value == null||value == "null") && (key in defaultOptions)) {
+    if ((value == null || value == "null") && (key in defaultOptions)) {
         setItem(key, defaultOptions[key]);
         value = defaultOptions[key];
     }
@@ -389,15 +387,15 @@ function getOptions(){
 }
 
 function onRequest(request, sender, callback) {
-    if (request.action == "check") {
+    if (request.action == "check"){
         if (request.url) {  
             var options = getOptions();
             var promise;
             var response = {status:null,document:null};
-            if(XHRisNecessary(options,request.url)===true){
+            if(XHRisNecessary(options,request.url) === true){
                 check(request.url)
                 .then(function(response){
-                    if (options.cache=='true' && (200 <= response.status && response.status < 400)){
+                    if (options.cache == 'true' && (200 <= response.status && response.status < 400)){
                         // Add link to database
                         indexedDBHelper.addLink(request.url, response.status);
                     }
@@ -421,7 +419,7 @@ function onRequest(request, sender, callback) {
                     return new Promise(function(resolve, reject){resolve(response);});
                 })
                 .then(function(response){
-                    if ((response.source=="xhr") && (200 <= response.status && response.status < 400)){
+                    if ((response.source == "xhr") && (200 <= response.status && response.status < 400)){
                         // Add link to database
                         indexedDBHelper.addLink(request.url, response.status);
                     }
@@ -430,7 +428,6 @@ function onRequest(request, sender, callback) {
                 .then(function(response){
                     callback(response);
                 });
-            
             }
         }
         return false;

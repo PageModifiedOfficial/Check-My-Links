@@ -23,13 +23,13 @@
 		</select>
 
 
-		<p>HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, use GET if you're getting weird results.</p>
+		<p>HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, use GET if you're getting weird results.  GET is required to be able to parse the document for an element corresponding to what is after the hashtag by ID.</p>
 
 		<hr/>
 		<h3>Warnings</h3>
 		
 		<label for="parseDOM">Parse DOM after hashtag (#): </label> <input type="checkbox" name="parseDOM" id="parseDOM" value="1">
-		<p>Hashtags can link to elements by id within the DOM. Enabling will add add the check to make sure an element exists by id to correspond to the hashtag.  When enabled, if the page resolves but the corresponding element is not found, the element will be marked as a warning and shown in the console.log (F12->Console tab)</p>
+		<p>Hashtags can link to elements by id within the DOM. Enabling will add add the check to make sure an element exists by id to correspond to the hashtag.  When enabled, if the page resolves but the corresponding element is not found, the element will be marked as a warning and shown in the console.log (F12->Console tab). <strong>Request Type: GET is required</strong></p>
 		
 		<label for="trailingHash">Trailing '#' (href="#"): </label> <input type="checkbox" name="trailingHash" id="trailingHash" value="1">
 		<p>When enabled, if the link url endswith '#' you will be warned.</p>

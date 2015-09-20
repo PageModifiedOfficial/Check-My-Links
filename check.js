@@ -7,7 +7,7 @@ chrome.extension.onMessage.addListener(
 
   function doStuff(request, sender) {
 
-  if(request.action=="initial"){
+  if(request.action == "initial"){
     var rpBox;
     var blacklist = request.options.blacklist;
     blacklist = blacklist.split("\n");
@@ -26,53 +26,41 @@ chrome.extension.onMessage.addListener(
       var link = pageLinks[i];
       var isValidLink = false;
       isValidLink = isLinkValid(link,request,blacklist);
-      if(isValidLink===true){
-        queued+=1;
+      if(isValidLink === true){
+        queued += 1;
         link.classList.add("CMY_Link");
         checkURL(link, request.options);
       }
       else{
-        totalvalid-=1;
+        totalvalid -= 1;
       }
     }
     rbAmt.innerHTML = "Links: " + totalvalid;
     // When close element is clicked, hide UI
-    document.getElementById("CMY_RB_Close").onclick=function(){removeDOMElement("CMY_ReportBox");};
-    document.getElementById("CMY_RB_Export").onclick=function(){
-      // OpenInNewTab();
+    document.getElementById("CMY_RB_Close").onclick = function(){removeDOMElement("CMY_ReportBox");};
+    document.getElementById("CMY_RB_Export").onclick = function(){
     var output = "";
     var badLinks = document.getElementsByClassName("CMY_Invalid");
-    // Get a export format option?
     // Export csv string so it is accessible via excel
-    // console.log(exportToCSV(badLinks));
-    console.log("dummy export");
-    console.log(badLinks);
-    // for (badLink in badLinks){
-    //   console.log(badLink);
-    //   console.log(badLink.href & badLink.outerHTML);
-    // }
-    output += "URL ,OuterHTML\n"
-    for (i = 0; i < badLinks.length; i++) {
-      var outerHTML;
-      output += "\"";
-      output += badLinks[i].href;
-      output += "\",";
-      output += "\"";
-      outerHTML = badLinks[i].outerHTML.replace(/"/g, '""');
-      // outerHTML = outerHTML.replace(/CMY_Link/g, '');
-      // outerHTML = outerHTML.replace(/CMY_Invalid/g, '');
-      // outerHTML = outerHTML.replace(/class="" ""/g, '');
-      output += outerHTML;
-      // output += badLinks[i].outerHTML;
-      output += "\"";
-      output += "\n";
-      // console.log(badLinks[i].href);
-      // console.log(badLinks[i].outerHTML);
+    if(badLinks.length > 0){
+      output += "URL,OuterHTML\n";
+      for (i = 0; i < badLinks.length; i++) {
+        var outerHTML;
+        output += "\"";
+        output += badLinks[i].href;
+        output += "\",";
+        output += "\"";
+        outerHTML = badLinks[i].outerHTML.replace(/"/g, '""');
+        output += outerHTML;
+        output += "\"";
+        output += "\n";
+      }
+      output = output.rtrim(',');
     }
-    output = output.rtrim(',');
+    else{
+      output = "No links to export";
+    }
     console.log(output);
-    // Alert them how the export works
-    alert("Exported to the console: F12->Console Tab.  The output can be copied and saved as a .csv file to be opened in Excel")
     };
     // Remove the event listener in the event this is run again without reloading
     chrome.extension.onMessage.removeListener(doStuff);
