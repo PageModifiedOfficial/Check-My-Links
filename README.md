@@ -1,4 +1,5 @@
 ## Check My Links
+[![Build Status](https://travis-ci.org/kyleladd/Check-My-Links.svg)](https://travis-ci.org/kyleladd/Check-My-Links)
 
 A Chrome Extension which checks links on webpages and shows their HTTP response codes. This allows web content editors to quickly see which links are broken (for whatever reason) and which resolve correctly.
 
