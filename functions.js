@@ -41,7 +41,7 @@ function isLinkValid(link,request,blacklist){
   if (url.startsWith('chrome-extension://')){
     return false;
   }
-  else if ((request.nf == 'false' && rel == "nofollow") || (url.startsWith('http') === false && url.length != 0)){
+  else if ((request.nf == 'false' && rel == "nofollow") || (url.startsWith('http') === false && url.length !== 0)){
     console.log("Skipped: " + url);
     return false;
   }
@@ -151,7 +151,7 @@ function createDisplay(optURL,cacheType,checkType){
 
   function updateDisplay(link,warnings,linkStatus){
     if (linkStatus) {
-      if (200 <= linkStatus && linkStatus < 400 && warnings.length == 0) {
+      if (200 <= linkStatus && linkStatus < 400 && warnings.length === 0) {
         link.classList.add("CMY_Valid");
         passed += 1;
         rbPass.innerHTML = passed;
@@ -287,7 +287,7 @@ function getParseDOMWarning(options,url,response,warnings){
         log("fragID");
         log(fragID);
         log(responseDoc.getElementById(fragID) || responseDoc.getElementsByName(fragID));
-        if(!responseDoc.getElementById(fragID) && !responseDoc.getElementsByName(fragID).length > 0){
+        if(!(responseDoc.getElementById(fragID)) && (responseDoc.getElementsByName(fragID).length <= 0)){
           warnings.push("Unable to find element to match hashtag");
         }
       }
@@ -352,7 +352,7 @@ function getOption(key){
     // Get Option from LocalStorage
     value = getItem(key);
     // Default the value if it does not exist in LocalStorage and a default value is defined above
-    if ((value == null || value == "null") && (key in defaultOptions)) {
+    if ((value === null || value == "null") && (key in defaultOptions)) {
         setItem(key, defaultOptions[key]);
         value = defaultOptions[key];
     }

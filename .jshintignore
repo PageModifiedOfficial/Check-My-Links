@@ -1,0 +1,4 @@
+tests/blanket/*
+tests/qunit/*
+tests/sinon/*
+tests/jquery_2_1_4.min.js

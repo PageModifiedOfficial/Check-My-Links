@@ -1,0 +1,12 @@
+{
+  "name": "CheckMyLinks",
+  "description": "Check My Links is a link checker that crawls through your webpage and looks for broken links.",
+  "author": "Ocodia",
+  "version": "1.1.2",
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  },
+  "scripts": {
+    "test": "jshint --exclude ./node_modules ."
+  }
+}

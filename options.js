@@ -51,12 +51,13 @@ function saveOptions() {
     // Save selected options to localstore
     bkg.setItem("blacklist", blacklistEntries.value);
     bkg.setItem("checkType", requestType.children[requestType.selectedIndex].value);
-    ((document.getElementById("cache").checked) ? bkg.setItem("cache", 'true') : bkg.setItem("cache", 'false'));
-    ((document.getElementById("noFollow").checked) ? bkg.setItem("noFollow", 'true') : bkg.setItem("noFollow", 'false'));
-    ((document.getElementById("parseDOM").checked) ? bkg.setItem("parseDOM", 'true') : bkg.setItem("parseDOM", 'false'));
-    ((document.getElementById("trailingHash").checked) ? bkg.setItem("trailingHash", 'true') : bkg.setItem("trailingHash", 'false'));
-    ((document.getElementById("emptyLink").checked) ? bkg.setItem("emptyLink", 'true') : bkg.setItem("emptyLink", 'false'));
-    ((document.getElementById("noHrefAttr").checked) ? bkg.setItem("noHrefAttr", 'true') : bkg.setItem("noHrefAttr", 'false'));
+
+    if(document.getElementById("cache").checked){bkg.setItem("cache", 'true');}else{bkg.setItem("cache", 'false');}
+    if(document.getElementById("noFollow").checked){bkg.setItem("noFollow", 'true');}else{bkg.setItem("noFollow", 'false');}
+    if(document.getElementById("parseDOM").checked){bkg.setItem("parseDOM", 'true');}else{bkg.setItem("parseDOM", 'false');}
+    if(document.getElementById("trailingHash").checked){bkg.setItem("trailingHash", 'true');}else{bkg.setItem("trailingHash", 'false');}
+    if(document.getElementById("emptyLink").checked){bkg.setItem("emptyLink", 'true');}else{bkg.setItem("emptyLink", 'false');}
+    if(document.getElementById("noHrefAttr").checked){bkg.setItem("noHrefAttr", 'true');}else{bkg.setItem("noHrefAttr", 'false');}
 
     document.getElementById("msg").style.visibility = "visible";
   });
