@@ -6,3 +6,13 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         chrome.tabs.sendMessage(tab.id, {options:getOptions(), action:"initial"});
     });
 });
+
+chrome.runtime.onInstalled.addListener(function(details){
+    if(details.reason == "install"){
+        chrome.tabs.create({url: "options.html?newinstall=yes"});
+    }
+    else if(details.reason == "update"){
+        var thisVersion = chrome.runtime.getManifest().version;
+        console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
+    }
+});
