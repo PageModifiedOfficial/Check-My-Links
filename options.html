@@ -1,143 +1,7 @@
 <html>
 <head>
 	<title>Check My Links: Options</title>
-	
-	<style rel="stylesheet" type="text/css">
-
-		body{
-			background-color:#eee;
-			font-family:arial,sans-serif;
-			font-size:13px
-		}
-
-		#content{
-			background-color: white;
-			border: 1px solid #DDD;
-			margin: 40px auto 20px;
-			padding: 12px;
-			width: 500px;
-			-webkit-border-radius: 12px;
-			box-shadow: 0px 0px 10px #ddd;
-		}
-
-		h1{
-			color:#333333;
-			font-size:1.5em;
-			margin:0.7em 0 0;
-		}
-
-
-		p{
-			font-size: 12px;
-		}
-
-		.buttons{
-			clear:left;
-			padding:5px;
-			text-align: center;
-		}
-
-		#save_status{
-			background-color:#fff1a8;
-			font-weight:bold;
-			margin-left:10px;
-			opacity:0;
-			padding:3px;
-			border-radius:3px
-		}
-
-		.footer{
-			text-align:center;
-			margin-top:0.4em;
-			color: rgba(0,0,0,0.2);
-		}
-
-		.footer a{
-			color: #333;
-			text-shadow: 1px 1px 1px white;
-			text-decoration: none;
-			border: 1px solid #ddd;
-			padding: 5px;
-			background: -webkit-gradient(linear, center top, center bottom, from(white), to(#fafafa));
-			border-radius: 5px;
-		}
-
-		.footer a:hover{
-			color: #111;
-			text-shadow: 1px 1px 1px white;
-			text-decoration: underline;
-		}
-
-		#msg, #msgCache{
-			background: #090;
-			border-radius: 5px 5px;
-			color: #fff;
-			font-weight: bold;
-			padding: 5px;
-			text-align: center;
-		}
-
-
-		#blacklistEntries{
-			width: 500px;
-			height: 200px;
-		}
-
-		#logo{
-			background: -webkit-gradient(linear, center top, center bottom, from(white), to(#EEE));
-			padding: 15px 0px 10px 10px;
-			height: 30px;
-			border-bottom: 1px solid #DDD;
-			margin: -12px -12px 20px -12px;
-			border-top-left-radius: 10px;
-			border-top-right-radius: 10px;
-			text-shadow: 1px 1px 1px white;
-			color: #666;
-		}
-
-		span{
-			font-family: monospace;
-			background: #D9EDF7;
-			padding: 3px;
-			color: #3A87AD;
-			border-radius: 5px;
-		}
-
-		label{
-			font-weight: bold;
-		}
-
-		#support{
-			margin: 0px -12px 10px -12px;
-			background: #fff;
-			padding: 0px 10px;
-			border-bottom-left-radius: 10px;
-			border-bottom-right-radius: 10px;
-			text-align: center;
-
-		}
-
-
-		.option_row{
-			clear:left;
-		}
-
-		.option_name{
-			float:left;
-			font-weight:bold;
-			margin-top:3px;
-		}
-
-		.option_picker{
-			float:left
-		}
-
-		hr{
-			border: 1px solid #EEE;
-			border-bottom: none;
-			margin: 10px 0px;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/options_style.css" />
 </head>
 <body>
 	<div id="content">
@@ -159,8 +23,23 @@
 		</select>
 
 
-		<p>HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, use GET if you're getting weird results.</p>
+		<p>HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, use GET if you're getting weird results.  GET is required to be able to parse the document for an element corresponding to what is after the hashtag by ID.</p>
 
+		<hr/>
+		<h3>Warnings</h3>
+		
+		<label for="parseDOM">Parse DOM after hashtag (#): </label> <input type="checkbox" name="parseDOM" id="parseDOM" value="1">
+		<p>Hashtags can link to elements by id within the DOM. Enabling will add add the check to make sure an element exists by id to correspond to the hashtag.  When enabled, if the page resolves but the corresponding element is not found, the element will be marked as a warning and shown in the console.log (F12->Console tab). <strong>Request Type: GET is required</strong></p>
+		
+		<label for="trailingHash">Trailing '#' (href="#"): </label> <input type="checkbox" name="trailingHash" id="trailingHash" value="1">
+		<p>When enabled, if the link url endswith '#' you will be warned.</p>
+
+		<label for="emptyLink">Empty Link (href=""): </label> <input type="checkbox" name="emptyLink" id="emptyLink" value="1">
+		<p>When enabled, if the link url endswith '#' you will be warned.</p>
+
+		<label for="noHrefAttr">Anchor tag without href (<a>No Link</a>): </label> <input type="checkbox" name="noHrefAttr" id="noHrefAttr" value="1">
+		<p>When enabled, if there is an anchor tag without an 'href' attribute you will be warned.</p>
+		
 		<hr/>
 
 		<strong>Valid Link Caching</strong>
@@ -207,7 +86,7 @@
 		</div>
 
 		<div class="footer">
-			<a href="http://twitter.com/ocodia">By Paul Livingstone</a> - <a href="https://github.com/ocodia/Check-My-Links/wiki">Wiki</a> - <a href="https://github.com/ocodia/Check-My-Links/issues">Report an issue</a> - <a href="https://github.com/ocodia/Check-My-Links">Fork me on Github</a>
+			<a href="http://twitter.com/ocodia">By Paul Livingstone</a> - <a href="https://github.com/ocodia/Check-My-Links/wiki">Wiki</a> - <a href="https://github.com/ocodia/Check-My-Links/issues">Report an issue</a> - <a href="https://github.com/ocodia/Check-My-Links">Fork me on Github</a>- <a href="tests/index.html">QUnit Tests</a>
 		</div>
 		<script src="db.js"></script>
 		<script src="options.js"></script>
