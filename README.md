@@ -32,5 +32,7 @@ Check My Links is released under the MIT license.
 
 www.opensource.org/licenses/MIT
 
-Thanks
+### Special thanks
+
+Special thanks to Kyle Ladd for most of the features and refinements to this extension over the last year. He has helped make this extension into what I'd hoped it would become.
 
