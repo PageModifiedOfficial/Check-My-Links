@@ -60,6 +60,9 @@ function saveOptions() {
     if(document.getElementById("noHrefAttr").checked){bkg.setItem("noHrefAttr", 'true');}else{bkg.setItem("noHrefAttr", 'false');}
 
     document.getElementById("msg").style.visibility = "visible";
+    setTimeout(function() {
+      document.getElementById("msg").style.visibility = "hidden";
+    }, 2000);
   });
 }
 
@@ -67,6 +70,9 @@ function deleteObjectStore(){
   indexedDBHelper.deleteObjectStore();
   console.log("Cleared IndexedDB Datastore");
   document.getElementById("msgCache").style.visibility = "visible";
+  setTimeout(function() {
+    document.getElementById("msgCache").style.visibility = "hidden";
+  }, 2000);
 }
 
 document.getElementById('save').addEventListener('click', saveOptions);
