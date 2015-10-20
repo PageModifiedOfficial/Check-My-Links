@@ -542,13 +542,13 @@ QUnit.test("test the updateDisplay function appended element: error", function(a
 
 QUnit.test("test the updateDisplay function ReportBox display", function(assert) {
     updateDisplay(link,[],200);
-    assert.equal(rbPass.innerHTML, "Pass: " + passed.toString(), "passed innerhtml is set to passed count");
-    assert.equal(rbWarning.innerHTML, "Warning: " + warning.toString(), "warning innerhtml is set to warning count");
-    assert.equal(rbFail.innerHTML, "Fail: " + invalid.toString(), "fail innerhtml is set to fail count");
+    assert.equal(rbPass.innerHTML, "Valid links: " + passed.toString(), "passed innerhtml is set to passed count");
+    assert.equal(rbWarning.innerHTML, "Warnings: " + warning.toString(), "warning innerhtml is set to warning count");
+    assert.equal(rbFail.innerHTML, "Invalid links: " + invalid.toString(), "fail innerhtml is set to fail count");
     assert.equal(rbQueue.innerHTML, "Queue: " + queued.toString(), "queue innerhtml is set to queue count");
     updateDisplay(link2,["Warning: Empty Link"],200);
-    assert.equal(rbPass.innerHTML, "Pass: " + passed.toString(), "passed innerhtml is set to passed count");
-    assert.equal(rbWarning.innerHTML, "Warning: " + warning.toString(), "warning innerhtml is set to warning count");
-    assert.equal(rbFail.innerHTML, "Fail: " + invalid.toString(), "fail innerhtml is set to fail count");
+    assert.equal(rbPass.innerHTML, "Valid links: " + passed.toString(), "passed innerhtml is set to passed count");
+    assert.equal(rbWarning.innerHTML, "Warnings: " + warning.toString(), "warning innerhtml is set to warning count");
+    assert.equal(rbFail.innerHTML, "Invalid links: " + invalid.toString(), "fail innerhtml is set to fail count");
     assert.equal(rbQueue.innerHTML, "Queue: " + queued.toString(), "queue innerhtml is set to queue count");
 });

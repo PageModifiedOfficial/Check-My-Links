@@ -50,13 +50,14 @@
     text-shadow: 1px 1px 1px #666;
 }
 #CMY_ReportBox .CMY_RB_ResultCount {
-    font-size: 20px;
+    font-size: 18px;
     box-sizing: border-box;
     color: #fff;
     font-weight: bold;
     text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     text-align: left;
     padding: 10px 10px 10px 10px;
+    text-shadow: 0 0 2px rgba(0,0,0,0.8);
 }
 #CMY_ReportBox .CMY_RB_Meta {
     text-align: center;

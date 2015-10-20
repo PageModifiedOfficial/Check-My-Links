@@ -97,17 +97,17 @@ function createDisplay(optURL,cacheType,checkType){
   rbPass = create("div", {
     id: "CMY_RB_Pass",
     class: "CMY_RB_ResultCount",
-    innerHTML: "Valid: 0"
+    innerHTML: "Valid links: 0"
   });
   rbWarning = create("div", {
     id: "CMY_RB_Warning",
     class: "CMY_RB_ResultCount",
-    innerHTML: "Warning: 0"
+    innerHTML: "Warnings: 0"
   });
   rbFail = create("div", {
     id: "CMY_RB_Fail",
     class: "CMY_RB_ResultCount",
-    innerHTML: "Fail: 0"
+    innerHTML: "Invalid links: 0"
   });
   rbClose = create("div", {
     id: "CMY_RB_Close",
@@ -154,7 +154,7 @@ function createDisplay(optURL,cacheType,checkType){
       if (200 <= linkStatus && linkStatus < 400 && warnings.length == 0) {
         link.classList.add("CMY_Valid");
         passed += 1;
-        rbPass.innerHTML = "Pass: " + passed;
+        rbPass.innerHTML = "Valid links: " + passed;
       }
       else if(200 <= linkStatus && linkStatus < 400 && warnings.length > 0){
         var response;
@@ -169,7 +169,7 @@ function createDisplay(optURL,cacheType,checkType){
         link.classList.add("CMY_Warning");
         link.innerHTML += " <span class=\"CMY_Response\">"+ linkStatus +"</span>";
         warning += 1;
-        rbWarning.innerHTML = "Warning: " + warning; 
+        rbWarning.innerHTML = "Warnings: " + warning; 
         console.log(response);
       }
       else {
@@ -177,7 +177,7 @@ function createDisplay(optURL,cacheType,checkType){
         link.classList.add("CMY_Invalid");
         link.innerHTML += " <span class=\"CMY_Response\">" + linkStatus + "</span>";
         invalid += 1;
-        rbFail.innerHTML =  "Fail: " +invalid;
+        rbFail.innerHTML =  "Invalid links: " +invalid;
       }
       queued -= 1;
       checked += 1;
