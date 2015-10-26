@@ -249,7 +249,7 @@ function XHRisNecessary(options,url){
 
 function getTrailingHashWarning(options,link,warnings){
   if(options.trailingHash == 'true'){
-       if(link.href.lastIndexOf("#") == link.href.length-1){
+       if(link.href.lastIndexOf("#") == link.href.length-1 && link.href.lastIndexOf("#") >= 0){
           warnings.push("Link has a trailing hash");
       }
   }
