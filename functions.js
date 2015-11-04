@@ -433,3 +433,12 @@ function onRequest(request, sender, callback) {
         return false;
     }
 }
+
+//Remove duplicates from array
+function unique(list) {
+    var result = [];
+    $.each(list, function(i, e) {
+        if ($.inArray(e, result) == -1) result.push(e);
+    });
+    return result;
+}
