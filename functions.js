@@ -347,6 +347,7 @@ function getOption(key){
         trailingHash: "false",
         emptyLink: "false",
         noHrefAttr: "false",
+        autoCheck: "false",
         optionsURL: chrome.extension.getURL("options.html")
     };
     // Get Option from LocalStorage
@@ -382,6 +383,7 @@ function getOptions(){
     options.trailingHash = getOption("trailingHash");
     options.emptyLink = getOption("emptyLink");
     options.noHrefAttr = getOption("noHrefAttr");
+    options.autoCheck = getOption("autoCheck");
     options.optionsURL = getOption("optionsURL");
     return options;
 }
