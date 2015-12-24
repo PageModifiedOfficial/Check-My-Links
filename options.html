@@ -27,25 +27,25 @@
 
 		<hr/>
 		<h3>Warnings</h3>
+		<p>Warnings are shown in the console.log (F12->Console tab). Also, they are highlighted yellow.</p>
+		<input type="checkbox" name="parseDOM" id="parseDOM" value="1"><label for="parseDOM">Parse DOM after hashtag (&lt;a href=&quot;page2.html#elementID&quot;&gt;Link&lt;/a&gt;) </label> 
+		<p>Hashtags can link to elements by id within the DOM. Enabling will add add the check to make sure an element exists by id to correspond to the hashtag.  When enabled, if the page resolves but the corresponding element is not found, the element will be marked as a warning. <strong>Request Type: GET is required</strong></p>
 		
-		<label for="parseDOM">Parse DOM after hashtag (#): </label> <input type="checkbox" name="parseDOM" id="parseDOM" value="1">
-		<p>Hashtags can link to elements by id within the DOM. Enabling will add add the check to make sure an element exists by id to correspond to the hashtag.  When enabled, if the page resolves but the corresponding element is not found, the element will be marked as a warning and shown in the console.log (F12->Console tab). <strong>Request Type: GET is required</strong></p>
-		
-		<label for="trailingHash">Trailing '#' (href="#"): </label> <input type="checkbox" name="trailingHash" id="trailingHash" value="1">
+		<input type="checkbox" name="trailingHash" id="trailingHash" value="1"><label for="trailingHash">Trailing '#' (&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;") </label> 
 		<p>When enabled, if the link url endswith '#' you will be warned.</p>
 
-		<label for="emptyLink">Empty Link (href=""): </label> <input type="checkbox" name="emptyLink" id="emptyLink" value="1">
-		<p>When enabled, if the link url endswith '#' you will be warned.</p>
+		<input type="checkbox" name="emptyLink" id="emptyLink" value="1"><label for="emptyLink">Empty Link (&lt;a href=&quot;&quot;&gt;Empty href&lt;/a&gt;) </label> 
+		<p>When enabled, if the link url is empty 'href=""' you will be warned.</p>
 
-		<label for="noHrefAttr">Anchor tag without href (<a>No Link</a>): </label> <input type="checkbox" name="noHrefAttr" id="noHrefAttr" value="1">
+		<input type="checkbox" name="noHrefAttr" id="noHrefAttr" value="1"><label for="noHrefAttr">Anchor tag without href (&lt;a&gt;No href&lt;/a&gt;) </label> 
 		<p>When enabled, if there is an anchor tag without an 'href' attribute you will be warned.</p>
 		
 		<hr/>
 
 		<strong>Valid Link Caching</strong>
-		<p>If you don't want to constantly re-check good (green, HTTP 200) links, enable the option below to force the extension to only check links which were previously broken (red, HTTP 404 etc). Enabling 'Valid Link Caching' vastly reduces the time it will take to repeatedly check a page.</p>
+		<p>If you don't want to constantly re-check good (green, HTTP 200) links, enable the option below to force the extension to only check new links or links which were previously broken (red, HTTP 404 etc). Enabling 'Valid Link Caching' vastly reduces the time it will take to repeatedly check a page.</p>
 
-		<label for="cache">Cache Valid Links: </label> <input type="checkbox" name="cache" id="cache" value="1">
+		<input type="checkbox" name="cache" id="cache" value="1"><label for="cache">Cache Valid Links: </label> 
 
 		<div class="buttons">
 			<button id="clearCache">Clear Cache</button>
@@ -56,7 +56,7 @@
 		<hr/>
 		<strong>Nofollow Links</strong>
 		<p>By default, Check My Links will not check links with a link rel attribute of 'nofollow', you should apply this attribute to links you don't want the extension to trigger (such as Log Out, Sign Out links etc).</p>
-		    <strong>Check Links with rel="nofollow":<strong> <input type="checkbox" name="noFollow" id="noFollow" value="1"><br />
+		    <input type="checkbox" name="noFollow" id="noFollow" value="1"><strong>Check Links with rel="nofollow"<strong> <br />
     <hr/>
 
 		<div id="support">
