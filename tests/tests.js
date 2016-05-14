@@ -30,7 +30,7 @@ QUnit.module("Generic DOM functions", {
     var moduleContainer = document.createElement('div');
     moduleContainer.id = 'moduleContainer';
     document.getElementById("qunit-fixture").appendChild(moduleContainer);
-    
+
     var moduleElement1 = document.createElement('div');
     moduleElement1.className = 'moduleclass';
     moduleElement1.id = 'moduleElement1';
@@ -401,7 +401,7 @@ QUnit.module("OnRequest function", {
 
 QUnit.test("test the onrequest function make sure addLink is called when cache is true and response is 200:", function(assert) {
     window.getOption = sandbox.stub().returns("true");
-    window.XHRisNecessary = sandbox.stub().returns(true);    
+    window.XHRisNecessary = sandbox.stub().returns(true);
     var spy = sandbox.spy(indexedDBHelper,"addLink");
     window.check = sandbox.stub().returns(new Promise(function(resolve, reject){resolve({status:200,document:null,source:"xhr"});}));
     onRequest({action:"check",url:"http://example.com/"},null,function(){});
@@ -417,7 +417,7 @@ QUnit.test("test the onrequest function make sure addLink is called when cache i
 
 QUnit.test("test the onrequest function make sure addLink is not called when cache is true and response is 404:", function(assert) {
     window.getOption = sandbox.stub().returns("true");
-    window.XHRisNecessary = sandbox.stub().returns(true);    
+    window.XHRisNecessary = sandbox.stub().returns(true);
     var spy = sandbox.spy(indexedDBHelper,"addLink");
     window.check = sandbox.stub().returns(new Promise(function(resolve, reject){resolve({status:404,document:null,source:"xhr"});}));
     onRequest({action:"check",url:"http://example.com/"},null,function(){});
@@ -433,7 +433,7 @@ QUnit.test("test the onrequest function make sure addLink is not called when cac
 
 QUnit.test("test the onrequest function make sure addLink is not called when cache is false and response is 200:", function(assert) {
     window.getOption = sandbox.stub().returns("false");
-    window.XHRisNecessary = sandbox.stub().returns(true);    
+    window.XHRisNecessary = sandbox.stub().returns(true);
     var spy = sandbox.spy(indexedDBHelper,"addLink");
     window.check = sandbox.stub().returns(new Promise(function(resolve, reject){resolve({status:200,document:null,source:"xhr"});}));
     onRequest({action:"check",url:"http://example.com/"},null,function(){});
@@ -449,8 +449,8 @@ QUnit.test("test the onrequest function make sure addLink is not called when cac
 
 QUnit.test("test the onrequest function make sure getLink is called when cache is true and addLink is not called when not found:", function(assert) {
     window.getOption = sandbox.stub().returns("true");
-    window.XHRisNecessary = sandbox.stub().returns(false);    
-    var stub = sandbox.stub(indexedDBHelper,"getLink").returns(new Promise(function(resolve, reject){resolve(500);}));    
+    window.XHRisNecessary = sandbox.stub().returns(false);
+    var stub = sandbox.stub(indexedDBHelper,"getLink").returns(new Promise(function(resolve, reject){resolve(500);}));
     window.check = sandbox.stub().returns(new Promise(function(resolve, reject){resolve({status:200,document:null,source:"xhr"});}));
     onRequest({action:"check",url:"http://example.com/"},null,function(){});
     assert.ok(window.getOption.called);
@@ -465,8 +465,8 @@ QUnit.test("test the onrequest function make sure getLink is called when cache i
 
 QUnit.test("test the onrequest function make sure getLink is called when cache is true and addLink is called when found 200:", function(assert) {
     window.getOption = sandbox.stub().returns("true");
-    window.XHRisNecessary = sandbox.stub().returns(false);    
-    var stub = sandbox.stub(indexedDBHelper,"getLink").returns(new Promise(function(resolve, reject){resolve({status:200});}));    
+    window.XHRisNecessary = sandbox.stub().returns(false);
+    var stub = sandbox.stub(indexedDBHelper,"getLink").returns(new Promise(function(resolve, reject){resolve({status:200});}));
     window.check = sandbox.stub().returns(new Promise(function(resolve, reject){resolve({status:200,document:null,source:"xhr"});}));
     onRequest({action:"check",url:"http://example.com/"},null,function(){});
     assert.ok(window.getOption.called);
@@ -520,6 +520,14 @@ QUnit.test("test the updateDisplay function global variables: warnings", functio
 
 QUnit.test("test the updateDisplay function global variables: error", function(assert) {
     updateDisplay(link,[],404);
+    assert.equal(passed, 0, "passed stayed the same");
+    assert.equal(warning, 0, "warning stayed the same");
+    assert.equal(invalid, 1, "invalid increased");
+    assert.equal(queued, 1, "queued decreased");
+    assert.equal(checked, 1, "checked increased");
+});
+QUnit.test("test the updateDisplay function global variables: dns error", function(assert) {
+    updateDisplay(link,[],0);
     assert.equal(passed, 0, "passed stayed the same");
     assert.equal(warning, 0, "warning stayed the same");
     assert.equal(invalid, 1, "invalid increased");
