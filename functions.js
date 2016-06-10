@@ -67,6 +67,7 @@ function clearDisplay(){
   removeDOMElement("CMY_ReportBox");
   removeClassFromElements("CMY_Link");
   removeClassFromElements("CMY_Valid");
+  removeClassFromElements("CMY_Redirect");
   removeClassFromElements("CMY_Invalid");
   removeElementsByClass("CMY_Response");
 }
@@ -96,6 +97,11 @@ function createDisplay(optURL,cacheType,checkType){
   });
   rbPass = create("div", {
     id: "CMY_RB_Pass",
+    class: "CMY_RB_ResultCount",
+    innerHTML: "Valid links: 0"
+  });
+  rbRedirect = create("div", {
+    id: "CMY_RB_Redirect",
     class: "CMY_RB_ResultCount",
     innerHTML: "Valid links: 0"
   });
@@ -145,16 +151,23 @@ function createDisplay(optURL,cacheType,checkType){
   reportBox.appendChild(rbQueue);
   reportBox.appendChild(rbOptions);
   reportBox.appendChild(rbPass);
+  reportBox.appendChild(rbRedirect);
   reportBox.appendChild(rbWarning);
   reportBox.appendChild(rbFail);
 }
 
   function updateDisplay(link,warnings,linkStatus){
     if (linkStatus) {
-      if (200 <= linkStatus && linkStatus < 400 && warnings.length === 0) {
+      if (200 <= linkStatus && linkStatus < 300 && warnings.length === 0) {
         link.classList.add("CMY_Valid");
         passed += 1;
         rbPass.innerHTML = "Valid links: " + passed;
+      }
+      else if(300 <= linkStatus && linkStatus < 400 && warnings.length === 0){
+        link.classList.add("CMY_Redirect");
+        link.classList.add("CMY_Valid");
+        redirected += 1;
+        rbRedirect.innerHTML = "Valid redirecting links: " + redirected;
       }
       else if(200 <= linkStatus && linkStatus < 400 && warnings.length > 0){
         var response;
@@ -224,7 +237,14 @@ function check(url) {
               response.document = xhr.responseText;
             }
             response.source = "xhr";
-            response.status = xhr.status;
+            // Redirects eventually 200, comparing response URL with requested to detect redirects
+            console.log(xhr.responseURL); 
+            if (xhr.responseURL == url.split('#')[0]) {
+              response.status = xhr.status;
+            }
+            else {
+              response.status = 300;
+            }
             resolve(response);
         }
     };
