@@ -7,7 +7,7 @@
    "description": "Check My Links is a link checker that crawls through your webpage and looks for broken links.",
     "icons": { "128": "icon.png" },
    "name": "Check My Links",
-   "permissions": [ "storage", "tabs", "*://*/*" ],
+   "permissions": [ "storage", "tabs", "*://*/*", "file:///*"],
    "version": "3.6.1",
    "manifest_version": 2,
    "background": { "scripts": ["functions.js","background.js","db.js","check.js"] },
