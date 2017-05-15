@@ -2,6 +2,7 @@ var queued = 0;
 var checked = 0;
 var invalid = 0;
 var warning = 0;
+var redirected = 0;
 var passed = 0;
 chrome.extension.onMessage.addListener(
 

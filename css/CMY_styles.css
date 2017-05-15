@@ -12,6 +12,10 @@
     background: #669900 !important;
     color: #fff !important;
 }
+.CMY_Redirect {
+    background: #88C700 !important;
+    color: #fff !important;
+}
 .CMY_Warning {
     background: #D5DE23 !important;
     color: #fff !important;
@@ -92,11 +96,15 @@
     text-align: center;
 }
 #CMY_ReportBox #CMY_RB_Pass {
+    border-top: 1px solid #669900;
+    border-right: 1px solid #669900;
+    background-color: #669900;
+    clear: both;
+}
+#CMY_ReportBox #CMY_RB_Redirect {
     border-top: 1px solid #bddf5d;
     border-right: 1px solid #8db615;
-    background-color: #9fcd19;
-    clear: both;
-
+    background-color: #88C700;
 }
 #CMY_ReportBox #CMY_RB_Warning {
     border-top: 1px solid #bddf5d;
