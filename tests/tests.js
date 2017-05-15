@@ -249,6 +249,9 @@ QUnit.test("test the warnings functions", function(assert) {
     assert.deepEqual(getTrailingHashWarning({trailingHash:"false"},link,[]), [], "warning should not be appended when option is false");
     assert.deepEqual(getTrailingHashWarning({trailingHash:"true"},link,[]), [], "warning should not be appended when option is true and there is a slash after the hash");
 
+    assert.deepEqual(getTrailingHashWarning({trailingHash:"true"},emptyLink,[]), [], "warning should not be appended when option is true and link is empty");
+    assert.deepEqual(getTrailingHashWarning({trailingHash:"true"},noHrefLink,[]), [], "warning should not be appended when option is true and link does not have an href attribute");
+
     // need to check the outerHTML because chrome inputs current url for empty href tags
     assert.deepEqual(getEmptyLinkWarning({emptyLink:"false"},emptyLink,[]), [], "warning should not be appended when option is false");
     assert.deepEqual(getEmptyLinkWarning({emptyLink:"true"},"<a href=''>",[]), ["Link is empty"], "warning should be appended when option is true and link is empty");
