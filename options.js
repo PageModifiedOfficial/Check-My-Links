@@ -29,6 +29,9 @@ function loadOptions() {
     if(options.noHrefAttr == 'true'){
       document.getElementById("noHrefAttr").checked = true;
     }
+    if(options.autoCheck == 'true'){
+      document.getElementById("autoCheck").checked = true;
+    }
 
     document.getElementById("blacklistEntries").value = options.blacklist.split(" ");
     var requestType = document.getElementById("requestType");
@@ -58,6 +61,7 @@ function saveOptions() {
     if(document.getElementById("trailingHash").checked){bkg.setItem("trailingHash", 'true');}else{bkg.setItem("trailingHash", 'false');}
     if(document.getElementById("emptyLink").checked){bkg.setItem("emptyLink", 'true');}else{bkg.setItem("emptyLink", 'false');}
     if(document.getElementById("noHrefAttr").checked){bkg.setItem("noHrefAttr", 'true');}else{bkg.setItem("noHrefAttr", 'false');}
+    if(document.getElementById("autoCheck").checked){bkg.setItem("autoCheck", 'true');}else{bkg.setItem("autoCheck", 'false');}
 
     document.getElementById("msg").style.visibility = "visible";
     setTimeout(function() {
