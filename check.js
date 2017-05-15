@@ -21,7 +21,7 @@ chrome.extension.onMessage.addListener(
     var pageLinks = document.getElementsByTagName('a');
     log(pageLinks);
     var totalvalid = pageLinks.length;
-    
+
     for (var i = 0; i < pageLinks.length; i++){
       var link = pageLinks[i];
       var isValidLink = false;
@@ -82,7 +82,7 @@ chrome.extension.onMessage.addListener(
       warnings = getParseDOMWarning(options,link.href,response,warnings);
       // Pass in the outerHTML, the href attributes defaults to the current page if left empty
       warnings = getEmptyLinkWarning(options,link.outerHTML,warnings);
-      warnings = getNoHrefLinkWarning(options,link,warnings);      
+      warnings = getNoHrefLinkWarning(options,link,warnings);
       updateDisplay(link,warnings,response.status);
     });
   }

@@ -9,8 +9,8 @@ String.prototype.contains = function(text) {
   return this.indexOf(text) !== -1;
 };
 
-String.prototype.rtrim = function(s) { 
-    return this.replace(new RegExp(s + "*$"),''); 
+String.prototype.rtrim = function(s) {
+    return this.replace(new RegExp(s + "*$"),'');
 };
 
 function removeClassFromElements(classname) {
@@ -150,39 +150,37 @@ function createDisplay(optURL,cacheType,checkType){
 }
 
   function updateDisplay(link,warnings,linkStatus){
-    if (linkStatus) {
-      if (200 <= linkStatus && linkStatus < 400 && warnings.length === 0) {
-        link.classList.add("CMY_Valid");
-        passed += 1;
-        rbPass.innerHTML = "Valid links: " + passed;
-      }
-      else if(200 <= linkStatus && linkStatus < 400 && warnings.length > 0){
-        var response;
-        response = "Response " + linkStatus + ": " + link.href + " Warning: ";
-        for (var i = 0; i < warnings.length; i++)
-        {
-          response += warnings[i];
-          if(i < warnings.length-1){
-            response += ",";
-          }
-        }
-        link.classList.add("CMY_Warning");
-        link.innerHTML += " <span class=\"CMY_Response\">"+ linkStatus +"</span>";
-        warning += 1;
-        rbWarning.innerHTML = "Warnings: " + warning; 
-        console.log(response);
-      }
-      else {
-        console.log("Response " + linkStatus + ": " + link.href);
-        link.classList.add("CMY_Invalid");
-        link.innerHTML += " <span class=\"CMY_Response\">" + linkStatus + "</span>";
-        invalid += 1;
-        rbFail.innerHTML =  "Invalid links: " +invalid;
-      }
-      queued -= 1;
-      checked += 1;
-      rbQueue.innerHTML = "Queue: " + queued;
+    if (!isNaN(linkStatus) && 200 <= linkStatus && linkStatus < 400 && warnings.length === 0) {
+      link.classList.add("CMY_Valid");
+      passed += 1;
+      rbPass.innerHTML = "Valid links: " + passed;
     }
+    else if(!isNaN(linkStatus) && 200 <= linkStatus && linkStatus < 400 && warnings.length > 0){
+      var response;
+      response = "Response " + linkStatus + ": " + link.href + " Warning: ";
+      for (var i = 0; i < warnings.length; i++)
+      {
+        response += warnings[i];
+        if(i < warnings.length-1){
+          response += ",";
+        }
+      }
+      link.classList.add("CMY_Warning");
+      link.innerHTML += " <span class=\"CMY_Response\">"+ linkStatus +"</span>";
+      warning += 1;
+      rbWarning.innerHTML = "Warnings: " + warning;
+      console.log(response);
+    }
+    else {
+      console.log("Response " + linkStatus + ": " + link.href);
+      link.classList.add("CMY_Invalid");
+      link.innerHTML += " <span class=\"CMY_Response\">" + linkStatus + "</span>";
+      invalid += 1;
+      rbFail.innerHTML =  "Invalid links: " +invalid;
+    }
+    queued -= 1;
+    checked += 1;
+    rbQueue.innerHTML = "Queue: " + queued;
   }
   function create(name, props) {
     var el = document.createElement(name);
@@ -194,7 +192,7 @@ function createDisplay(optURL,cacheType,checkType){
         el.innerHTML = props[p];
       }
       else{
-        el.setAttribute(p,props[p]);  
+        el.setAttribute(p,props[p]);
       }
     }
     return el;
@@ -223,8 +221,8 @@ function check(url) {
             if (200 <= xhr.status && xhr.status < 400){
               response.document = xhr.responseText;
             }
-            response.source = "xhr";
             response.status = xhr.status;
+            response.source = "xhr";
             resolve(response);
         }
     };
@@ -235,6 +233,8 @@ function check(url) {
     }
     catch(e){
       console.log(e);
+      response.status = 0;
+      resolve(response);
     }
     XMLHttpTimeout = setTimeout(function (){response.status = 408;resolve(response); xhr.abort();}, timeout += 1000);
   });
@@ -269,7 +269,7 @@ function getEmptyLinkWarning(options,link,warnings){
 // Not utilized yet, would need to allow length 0 to be a valid link and then filter it out from trying to send an XHR request
 function getNoHrefLinkWarning(options,link,warnings){
   if(options.noHrefAttr == 'true'){
-    if (!link.hasAttribute("href")) {       
+    if (!link.hasAttribute("href")) {
       warnings.push("Link does not have an href attribute");
     }
   }
@@ -316,7 +316,7 @@ function getItem(key) {
     var value;
     log('Get Item:' + key);
     try {
-      value = window.localStorage.getItem(key);   
+      value = window.localStorage.getItem(key);
       if(typeof value === 'undefined'){
         return null;
       }
@@ -388,7 +388,7 @@ function getOptions(){
 
 function onRequest(request, sender, callback) {
     if (request.action == "check"){
-        if (request.url) {  
+        if (request.url) {
             var options = getOptions();
             var promise;
             var response = {status:null,document:null};
