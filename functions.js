@@ -103,7 +103,7 @@ function createDisplay(optURL,cacheType,checkType){
   rbRedirect = create("div", {
     id: "CMY_RB_Redirect",
     class: "CMY_RB_ResultCount",
-    innerHTML: "Valid links: 0"
+    innerHTML: "Redirect links: 0"
   });
   rbWarning = create("div", {
     id: "CMY_RB_Warning",
@@ -157,19 +157,18 @@ function createDisplay(optURL,cacheType,checkType){
 }
 
   function updateDisplay(link,warnings,linkStatus){
-    if (linkStatus) {
-      if (200 <= linkStatus && linkStatus < 300 && warnings.length === 0) {
+      if (!isNaN(linkStatus) && 200 <= linkStatus && linkStatus < 300 && warnings.length === 0) {
         link.classList.add("CMY_Valid");
         passed += 1;
         rbPass.innerHTML = "Valid links: " + passed;
       }
-      else if(300 <= linkStatus && linkStatus < 400 && warnings.length === 0){
+      else if(!isNaN(linkStatus) && 300 <= linkStatus && linkStatus < 400 && warnings.length === 0){
         link.classList.add("CMY_Redirect");
         link.classList.add("CMY_Valid");
         redirected += 1;
         rbRedirect.innerHTML = "Valid redirecting links: " + redirected;
       }
-      else if(200 <= linkStatus && linkStatus < 400 && warnings.length > 0){
+      else if(!isNaN(linkStatus) && 200 <= linkStatus && linkStatus < 400 && warnings.length > 0){
         var response;
         response = "Response " + linkStatus + ": " + link.href + " Warning: ";
         for (var i = 0; i < warnings.length; i++)
@@ -195,7 +194,6 @@ function createDisplay(optURL,cacheType,checkType){
       queued -= 1;
       checked += 1;
       rbQueue.innerHTML = "Queue: " + queued;
-    }
   }
   function create(name, props) {
     var el = document.createElement(name);
@@ -255,6 +253,8 @@ function check(url) {
     }
     catch(e){
       console.log(e);
+      response.status = 0;
+      resolve(response);
     }
     XMLHttpTimeout = setTimeout(function (){response.status = 408;resolve(response); xhr.abort();}, timeout += 1000);
   });
@@ -454,13 +454,4 @@ function onRequest(request, sender, callback) {
         }
         return false;
     }
-}
-
-//Remove duplicates from array
-function unique(list) {
-    var result = [];
-    $.each(list, function(i, e) {
-        if ($.inArray(e, result) == -1) result.push(e);
-    });
-    return result;
 }

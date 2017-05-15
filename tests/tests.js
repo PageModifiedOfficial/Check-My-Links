@@ -529,6 +529,14 @@ QUnit.test("test the updateDisplay function global variables: error", function(a
     assert.equal(queued, 1, "queued decreased");
     assert.equal(checked, 1, "checked increased");
 });
+QUnit.test("test the updateDisplay function global variables: dns error", function(assert) {
+    updateDisplay(link,[],0);
+    assert.equal(passed, 0, "passed stayed the same");
+    assert.equal(warning, 0, "warning stayed the same");
+    assert.equal(invalid, 1, "invalid increased");
+    assert.equal(queued, 1, "queued decreased");
+    assert.equal(checked, 1, "checked increased");
+});
 QUnit.test("test the updateDisplay function appended element: passed", function(assert) {
     updateDisplay(link,[],200);
     assert.equal(link.classList.contains("CMY_Valid"), true, "valid class");
