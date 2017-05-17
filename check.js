@@ -20,10 +20,7 @@ chrome.extension.onMessage.addListener(
     createDisplay(optURL,cacheType,checkType);
       // Gather links
     var pageLinks = document.getElementsByTagName('a');
-    
-    //remove duplicates from array
-    pageLinks = unique(pageLinks);
-    
+        
     log(pageLinks);
     var totalvalid = pageLinks.length;
     
