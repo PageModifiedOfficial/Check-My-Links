@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
 	<title>Check My Links: Options</title>
 	<link rel="stylesheet" type="text/css" href="css/options_style.css" />
@@ -34,10 +34,12 @@
 		<p>Hashtags can link to elements by id within the DOM. Enabling will add add the check to make sure an element exists by id to correspond to the hashtag.  When enabled, if the page resolves but the corresponding element is not found, the element will be marked as a warning and shown in the console.log (F12->Console tab). <strong>Request Type: GET is required</strong></p>
 		
 		<label for="trailingHash">Trailing '#' (href="#"): </label> <input type="checkbox" name="trailingHash" id="trailingHash" value="1">
-		<p>When enabled, if the link url ends with '#' you will be warned.</p>
+
+		<p>When enabled, if the link URL endswith '#' you will be warned.</p>
 
 		<label for="emptyLink">Empty Link (href=""): </label> <input type="checkbox" name="emptyLink" id="emptyLink" value="1">
-		<p>When enabled, if the link url is empty you will be warned.</p>
+		<p>When enabled, if the link URL is empty you will be warned.</p>
+
 
 		<label for="noHrefAttr">Anchor tag without href (<a>No Link</a>): </label> <input type="checkbox" name="noHrefAttr" id="noHrefAttr" value="1">
 		<p>When enabled, if there is an anchor tag without an 'href' attribute you will be warned.</p>
