@@ -33,21 +33,13 @@
 		<input type="checkbox" name="parseDOM" id="parseDOM" value="1"><label for="parseDOM">Parse DOM after hashtag (&lt;a href=&quot;page2.html#elementID&quot;&gt;Link&lt;/a&gt;) </label> 
 		<p>Hashtags can link to elements by id within the DOM. Enabling will add add the check to make sure an element exists by id to correspond to the hashtag.  When enabled, if the page resolves but the corresponding element is not found, the element will be marked as a warning. <strong>Request Type: GET is required</strong></p>
 		
-		<label for="parseDOM">Parse DOM after hashtag (#): </label> <input type="checkbox" name="parseDOM" id="parseDOM" value="1">
-		<p>Hashtags can link to elements by id within the DOM. Enabling will add add the check to make sure an element exists by id to correspond to the hashtag.  When enabled, if the page resolves but the corresponding element is not found, the element will be marked as a warning and shown in the console.log (F12->Console tab). <strong>Request Type: GET is required</strong></p>
-		
-		<label for="trailingHash">Trailing '#' (href="#"): </label> <input type="checkbox" name="trailingHash" id="trailingHash" value="1">
-
-		<p>When enabled, if the link URL endswith '#' you will be warned.</p>
-
-		<label for="emptyLink">Empty Link (href=""): </label> <input type="checkbox" name="emptyLink" id="emptyLink" value="1">
-		<p>When enabled, if the link URL is empty you will be warned.</p>
 
 		<input type="checkbox" name="trailingHash" id="trailingHash" value="1"><label for="trailingHash">Trailing '#' (&lt;a href=&quot;#&quot;&gt;Link&lt;/a&gt;") </label> 
 		<p>When enabled, if the link url endswith '#' you will be warned.</p>
 
 		<input type="checkbox" name="emptyLink" id="emptyLink" value="1"><label for="emptyLink">Empty Link (&lt;a href=&quot;&quot;&gt;Empty href&lt;/a&gt;) </label> 
 		<p>When enabled, if the link url is empty 'href=""' you will be warned.</p>
+
 
 		<input type="checkbox" name="noHrefAttr" id="noHrefAttr" value="1"><label for="noHrefAttr">Anchor tag without href (&lt;a&gt;No href&lt;/a&gt;) </label> 
 		<p>When enabled, if there is an anchor tag without an 'href' attribute you will be warned.</p>
