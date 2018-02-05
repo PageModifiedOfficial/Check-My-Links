@@ -34,32 +34,47 @@ function removeDOMElement(id){
   }
 }
 
-function isLinkValid(link,request,blacklist){
+function isLinkValid(link,request,blacklist,protocols){
   var url = link.href;
   var rel = link.rel;
+  var urlProtocol = link.protocol;
+  var protocolPermitted = false;
   var blacklisted = false;
+
   if (url.startsWith('chrome-extension://')){
     return false;
   }
-  else if ((request.nf == 'false' && rel == "nofollow") || (url.startsWith('http') === false && url.length !== 0)){
-    console.log("Skipped: " + url);
-    return false;
-  }
-  else{
-    for (var b = 0; b < blacklist.length; b++)
-    {
-      if (blacklist[b] !== "" && url.contains(blacklist[b])){
-        blacklisted = true;
-      }
-    }
 
-    if (blacklisted === true){
-      console.log("Skipped (blacklisted): " + url);
-      return false;
-    }
-    return true;
+  if ((request.options.noFollow == 'false' && rel == "nofollow") || (url.length === 0)){
+   return false;
   }
-  return false;
+
+  for (var b = 0; b < protocols.length; b++) {
+    if (protocols[b] !== ""
+      && (!urlProtocol.contains(
+        protocols[b].substr(0, protocols[b].length -1))
+      )
+    ){
+      protocolPermitted = true;
+    }
+  }
+
+  if (protocolPermitted === false) {
+   return false;
+  }
+
+  for (var b = 0; b < blacklist.length; b++)
+  {
+    if (blacklist[b] !== "" && url.contains(blacklist[b])){
+      blacklisted = true;
+    }
+  }
+
+  if (blacklisted === true){
+   return false;
+  }
+  
+  return true;
 }
 
 function clearDisplay(){
@@ -360,6 +375,10 @@ function getOption(key){
                     "googlesyndication.com\n" +
                     "adservices.google.com\n" +
                     "appliedsemantics.com",
+        protocols: "http\n" +
+                    "https\n" +
+                    "ftp\n" +
+                    "file",
         checkType: "GET",
         cache: "false",
         noFollow: "false",
@@ -396,6 +415,7 @@ function log(txt) {
 function getOptions(){
     var options = {};
     options.blacklist = getOption("blacklist");
+    options.protocols = getOption("protocols");
     options.checkType = getOption("checkType");
     options.cache = getOption("cache");
     options.noFollow = getOption("noFollow");

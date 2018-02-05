@@ -34,6 +34,9 @@ function loadOptions() {
     }
 
     document.getElementById("blacklistEntries").value = options.blacklist.split(" ");
+    
+    document.getElementById("protocolEntries").value = options.protocols.split(" ");
+
     var requestType = document.getElementById("requestType");
    
     for (var i = 0; i < requestType.children.length; i++) {
@@ -49,10 +52,12 @@ function loadOptions() {
 function saveOptions() {
   var bkg = chrome.runtime.getBackgroundPage(function(bkg){
     var blacklistEntries = document.getElementById("blacklistEntries");
+    var protocolEntries = document.getElementById("protocolEntries");
     var requestType = document.getElementById("requestType");
 
     // Save selected options to localstore
     bkg.setItem("blacklist", blacklistEntries.value);
+    bkg.setItem("protocols", protocolEntries.value);
     bkg.setItem("checkType", requestType.children[requestType.selectedIndex].value);
 
     if(document.getElementById("cache").checked){bkg.setItem("cache", 'true');}else{bkg.setItem("cache", 'false');}

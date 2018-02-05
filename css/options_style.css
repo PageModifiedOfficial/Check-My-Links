@@ -77,6 +77,11 @@ p{
     height: 200px;
 }
 
+#protocolEntries{
+    width: 500px;
+    height: 200px;
+}
+
 #logo{
     background: -webkit-gradient(linear, center top, center bottom, from(white), to(#EEE));
     padding: 15px 0px 10px 10px;
