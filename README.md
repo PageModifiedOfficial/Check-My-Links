@@ -8,7 +8,7 @@ A Chrome Extension which checks links on webpages and shows their HTTP response 
 
 See the Wiki for instructions:
 
-https://github.com/ValleyHosting/Check-My-Links/wiki
+https://github.com/PageModifiedOfficial/Check-My-Links/wiki
 
 You can install a packaged version of this extension here:
 
@@ -20,7 +20,7 @@ If you want to contact us regarding this extension you can reach us at support@p
 
 If you want to report an issue, bug or make a suggestion, please do so here:
 
-https://github.com/ValleyHosting/Check-My-Links/issues
+https://github.com/PageModifiedOfficial/Check-My-Links/issues
 
 ### License
 
