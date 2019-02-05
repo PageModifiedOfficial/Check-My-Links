@@ -60,6 +60,12 @@ chrome.extension.onMessage.addListener(
         } else {
           output = "No links to export";
         }
+        var exportText = document.createElement("textarea");
+        document.body.appendChild(exportText);
+        exportText.value = output;
+        exportText.select();
+        document.execCommand("copy");
+        document.body.removeChild(exportText);
         console.log(output);
       };
       // Remove the event listener in the event this is run again without reloading
