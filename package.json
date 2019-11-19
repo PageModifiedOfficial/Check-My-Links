@@ -2,7 +2,7 @@
     "name": "CheckMyLinks",
     "description": "Check My Links is a link checker that crawls through your webpage and looks for broken links.",
     "author": "PageModified",
-    "version": "3.5.1",
+    "version": "3.8.1",
     "devDependencies": {
         "jshint": "^2.6.0"
     },
