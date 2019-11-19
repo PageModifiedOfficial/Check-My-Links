@@ -1,6 +1,3 @@
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-98457349-3']);
-_gaq.push(['_trackPageview']);
 var queued = 0;
 var checked = 0;
 var invalid = 0;
