@@ -4,28 +4,34 @@
     font-weight: bold;
     border-right: 1px solid #fff;
 }
+
 .CMY_Invalid {
     background: #990000 !important;
     color: #fff !important;
 }
+
 .CMY_Valid {
     background: #669900 !important;
     color: #fff !important;
 }
+
 .CMY_Redirect {
     background: #88C700 !important;
     color: #fff !important;
 }
+
 .CMY_Warning {
     background: #D5DE23 !important;
     color: #fff !important;
 }
+
 .CMY_Response {
     color: #fff;
     border-left: 1px solid #fff;
     padding: 0px 5px;
     margin: 0px 0px 0px 5px;
 }
+
 #CMY_ReportBox {
     font-weight: bold;
     width: 250px;
@@ -42,6 +48,7 @@
     z-index: 999999;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
 }
+
 #CMY_RB_Header {
     border-radius: 5px 5px 0px 0px;
     border-bottom: 1px solid #444;
@@ -53,6 +60,7 @@
     margin: 0px;
     text-shadow: 1px 1px 1px #666;
 }
+
 #CMY_ReportBox .CMY_RB_ResultCount {
     font-size: 18px;
     box-sizing: border-box;
@@ -61,8 +69,9 @@
     text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     text-align: left;
     padding: 10px 10px 10px 10px;
-    text-shadow: 0 0 2px rgba(0,0,0,0.8);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
 }
+
 #CMY_ReportBox .CMY_RB_Meta {
     text-align: center;
     background: #111;
@@ -74,18 +83,40 @@
     line-height: 12px;
     width: 50%;
 }
+
+#CMY_ReportBox .CMY_RB_Sponsor {
+    text-align: center;
+    background: #111;
+    font-size: 11px;
+    padding: 10px 0px 10px 0px;
+    box-sizing: border-box;
+    color: #fff;
+    line-height: 12px;
+    width: 100%;
+}
+
+#CMY_ReportBox .CMY_RB_Sponsor a {
+    background: #111 !important;
+    color: #01a1dd !important;
+    border-right: none !important;
+}
+
 #CMY_ReportBox .CMY_RB_Meta a {
     color: #fff !important;
 }
+
 #CMY_ReportBox .CMY_RB_LC_Left {
     float: left;
 }
+
 #CMY_ReportBox .CMY_RB_LC_Right {
     float: right;
 }
+
 #CMY_ReportBox .CMY_RB_Queue {
     color: #F59703 !important;
 }
+
 #CMY_ReportBox #CMY_RB_Perc {
     font-size: 50px;
     line-height: 50px;
@@ -95,34 +126,40 @@
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
     text-align: center;
 }
+
 #CMY_ReportBox #CMY_RB_Pass {
     border-top: 1px solid #669900;
     border-right: 1px solid #669900;
     background-color: #669900;
     clear: both;
 }
+
 #CMY_ReportBox #CMY_RB_Redirect {
     border-top: 1px solid #bddf5d;
     border-right: 1px solid #8db615;
     background-color: #88C700;
 }
+
 #CMY_ReportBox #CMY_RB_Warning {
     border-top: 1px solid #bddf5d;
     border-right: 1px solid #8db615;
     border-left: 1px solid #8db615;
     background-color: #D5DE23;
 }
+
 #CMY_ReportBox #CMY_RB_Fail {
     border-top: 1px solid #c54f4f;
     border-radius: 0px 0px 5px 5px;
     background-color: #a9060a;
 }
+
 #CMY_ReportBox #CMY_RB_Close {
     float: right;
     color: #ffffff;
     cursor: pointer;
     padding: 2px 3px 4px;
 }
+
 #CMY_ReportBox #CMY_RB_Export {
     float: right;
     margin-right: 13px;
@@ -131,15 +168,18 @@
     width: 13px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAB3RJTUUH2AwSDAEgJjauGgAAAAlwSFlzAAALEgAACxIB0t1+/AAAAARnQU1BAACxjwv8YQUAAAFcSURBVHjabVA7qsJQFJwkVyWFYikKdpa6HbGyMoVkL2lsFAMiWYSVhZgVCPZaCCLGRjHxd59zII9H8qa53/mcMZDBYrHQ+/0ej8cDpVIJWuvfN57r9TpUlnQ4HNDtdlGpVPD5fGCaptxzv9vtsFqt8iQ62LaN9/sNx3Hkc7VaxeVywWw2w3K5zJNerxcKhYLsJ5MJLMtCv98XIpEkCVQYhnq73cIwDCil5JLgLCS4rovpdIrhcCiuFFSbzQa9Xk+yF4tFzOdz3O93ich4o9FIyBTkH8ZXVObQf+ORMBgMJB4TEJ7nyUons1wuy4HqBAu43W4Yj8dCoAjBFFEUiZvKNtbpdCQiFTkXBWq1Gs7ns0Rst9uA7/v6+XzqFF+i/orInmsQBDrbsMlG0tx0pH1aOZWPxyP+JaUPzJ2CM55OJzQajRxJNZtNrNdrXK9XxHEsg7NizshmW61WjvQDnNjJUsseLXoAAAAASUVORK5CYII=)
 }
+
 #CMY_ReportBox #CMY_RB_Options {
     border-top: 1px solid #333;
     color: #fff;
     background: #000;
     clear: both;
 }
+
 #CMY_ReportBox #CMY_RB_Settings {
     float: left;
 }
+
 #CMY_ReportBox #CMY_RB_Settings a {
     width: 13px;
     height: 13px;
