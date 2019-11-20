@@ -82,7 +82,7 @@ function createDisplay(optURL, cacheType, checkType) {
     rbPMLink = create("div", {
         id: "CMY_RB_Sponsored",
         class: "CMY_RB_Sponsor",
-        innerHTML: "Check my links is supported by Page Modfied. Use <a href='https://www.pagemodified.com/pricing/?utm_source=extension&utm_medium=link&utm_campaign=check_my_links' target='_blank'>Page Modified</a> to crawl an entire site!"
+        innerHTML: "Check My Links is supported by Page Modfied. Use <a href='https://www.pagemodified.com/pricing/?utm_source=extension&utm_medium=link&utm_campaign=check_my_links' target='_blank'>Page Modified</a> to crawl an entire site!"
     });
     rbAmt = create("div", {
         id: "CMY_RB_LC_Left",
