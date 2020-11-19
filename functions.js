@@ -1,15 +1,15 @@
 // Check My Links by Paul Livingstone
 // @ocodia
 var logging = false;
-String.prototype.startsWith = function(text) {
+String.prototype.startsWith = function (text) {
     return this.substr(0, text.length) == text;
 };
 
-String.prototype.contains = function(text) {
+String.prototype.contains = function (text) {
     return this.indexOf(text) !== -1;
 };
 
-String.prototype.rtrim = function(s) {
+String.prototype.rtrim = function (s) {
     return this.replace(new RegExp(s + "*$"), '');
 };
 
@@ -82,7 +82,7 @@ function createDisplay(optURL, cacheType, checkType) {
     rbPMLink = create("div", {
         id: "CMY_RB_Sponsored",
         class: "CMY_RB_Sponsor",
-        innerHTML: "Check My Links is supported by Page Modfied. Use <a href='https://www.pagemodified.com/pricing/?utm_source=extension&utm_medium=link&utm_campaign=check_my_links' target='_blank'>Page Modified</a> to crawl an entire site!"
+        innerHTML: "Check My Links is supported by <a href='https://logflare.app/?utm_source=extension&utm_medium=link&utm_campaign=check_my_links' target='_blank'>Logflare</a>. Easily ⤵️ ingest, 🌊 stream, 🔍 search and 📊 dashboard structured logs with <a href='https://logflare.app/?utm_source=extension&utm_medium=link&utm_campaign=check_my_links' target='_blank'>Logflare</a>."
     });
     rbAmt = create("div", {
         id: "CMY_RB_LC_Left",
@@ -223,10 +223,10 @@ var timeout = 30000;
 
 function check(url) {
     var response = { status: null, document: null };
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var XMLHttpTimeout = null;
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function(data) {
+        xhr.onreadystatechange = function (data) {
             if (xhr.readyState == 4) {
                 log(xhr);
                 clearTimeout(XMLHttpTimeout);
@@ -253,7 +253,7 @@ function check(url) {
             response.status = 0;
             resolve(response);
         }
-        XMLHttpTimeout = setTimeout(function() {
+        XMLHttpTimeout = setTimeout(function () {
             response.status = 408;
             resolve(response);
             xhr.abort();
@@ -417,36 +417,36 @@ function onRequest(request, sender, callback) {
             var response = { status: null, document: null };
             if (XHRisNecessary(options, request.url) === true) {
                 check(request.url)
-                    .then(function(response) {
+                    .then(function (response) {
                         if (options.cache == 'true' && (200 <= response.status && response.status < 400)) {
                             // Add link to database
                             indexedDBHelper.addLink(request.url, response.status);
                         }
-                        return new Promise(function(resolve, reject) { resolve(response); });
+                        return new Promise(function (resolve, reject) { resolve(response); });
                     })
-                    .then(function(response) {
+                    .then(function (response) {
                         callback(response);
                     });
             } else {
                 // Caching is true
-                indexedDBHelper.getLink(request.url).then(function(link) {
-                        if (typeof(link) != "undefined" && (200 <= link.status && link.status < 400)) {
-                            log("found");
-                            log(link);
-                            response.status = link.status;
-                        } else {
-                            response = check(request.url);
-                        }
-                        return new Promise(function(resolve, reject) { resolve(response); });
-                    })
-                    .then(function(response) {
+                indexedDBHelper.getLink(request.url).then(function (link) {
+                    if (typeof (link) != "undefined" && (200 <= link.status && link.status < 400)) {
+                        log("found");
+                        log(link);
+                        response.status = link.status;
+                    } else {
+                        response = check(request.url);
+                    }
+                    return new Promise(function (resolve, reject) { resolve(response); });
+                })
+                    .then(function (response) {
                         if ((response.source == "xhr") && (200 <= response.status && response.status < 400)) {
                             // Add link to database
                             indexedDBHelper.addLink(request.url, response.status);
                         }
-                        return new Promise(function(resolve, reject) { resolve(response); });
+                        return new Promise(function (resolve, reject) { resolve(response); });
                     })
-                    .then(function(response) {
+                    .then(function (response) {
                         callback(response);
                     });
             }
