@@ -10,10 +10,7 @@
   },
   "name": "Check My Links",
   "permissions": [
-    "storage",
-    "tabs",
-    "*://*/*",
-    "file:///*"
+    "activeTab"
   ],
   "version": "3.8.2",
   "manifest_version": 2,
