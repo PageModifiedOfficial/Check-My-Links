@@ -1,8 +1,17 @@
 {
     "name": "CheckMyLinks",
     "description": "Check My Links is a link checker that crawls through your webpage and looks for broken links.",
+    "homepage": "https://github.com/PageModifiedOfficial/Check-My-Links/",
     "author": "Logflare",
     "version": "3.8.2",
+    "license": "MIT"
+    "bugs": {
+        "url": "https://github.com/PageModifiedOfficial/Check-My-Links/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PageModifiedOfficial/Check-My-Links.git"
+    },
     "devDependencies": {
         "jshint": "^2.6.0"
     },
