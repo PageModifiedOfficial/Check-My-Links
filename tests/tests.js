@@ -335,6 +335,7 @@ QUnit.module("Options", {
 QUnit.test("test the getOption function do not default", function(assert) {
     window.localStorage.getItem.withArgs("blacklist").returns("http://example.com/");
     window.localStorage.getItem.withArgs("checkType").returns("GET");
+    window.localStorage.getItem.withArgs("rps").returns("30");
     window.localStorage.getItem.withArgs("cache").returns("true");
     window.localStorage.getItem.withArgs("noFollow").returns("true");
     window.localStorage.getItem.withArgs("parseDOM").returns("true");
@@ -344,6 +345,7 @@ QUnit.test("test the getOption function do not default", function(assert) {
     window.localStorage.getItem.withArgs("optionsURL").returns("true");
     assert.equal(getOption("blacklist"), "http://example.com/", "Testing the option value of blacklist is retrieved from LocalStorage");
     assert.equal(getOption("checkType"), "GET", "Testing the option value of checkType is retrieved from LocalStorage");
+    assert.equal(getOption("rps"), "30", "Testing the option value of rps is retrieved from LocalStorage");
     assert.equal(getOption("cache"), "true", "Testing the option value of cache is retrieved from LocalStorage");
     assert.equal(getOption("noFollow"), "true", "Testing the option value of noFollow is retrieved from LocalStorage");
     assert.equal(getOption("parseDOM"), "true", "Testing the option value of parseDOM is retrieved from LocalStorage");
@@ -366,6 +368,7 @@ QUnit.test("test the getOption function Defaults", function(assert) {
                     "adservices.google.com\n" +
                     "appliedsemantics.com", "Testing the default value of blacklist");
     assert.equal(getOption("checkType"), "GET", "Testing the default value of checkType");
+    assert.equal(getOption("rps"), "30", "Testing the default value of rps");
     assert.equal(getOption("cache"), "false", "Testing the default value of cache");
     assert.equal(getOption("noFollow"), "false", "Testing the default value of noFollow");
     assert.equal(getOption("parseDOM"), "false", "Testing the default value of parseDOM");
@@ -382,6 +385,7 @@ QUnit.test("test the getOptions function Defaults", function(assert) {
     getOptions();
     assert.equal(window.getOption.withArgs("blacklist").calledOnce, true, "getOption blacklist is called");
     assert.equal(window.getOption.withArgs("checkType").calledOnce, true, "getOption checkType is called");
+    assert.equal(window.getOption.withArgs("rps").calledOnce, true, "getOption rps is called");
     assert.equal(window.getOption.withArgs("cache").calledOnce, true, "getOption cache is called");
     assert.equal(window.getOption.withArgs("noFollow").calledOnce, true, "getOption noFollow is called");
     assert.equal(window.getOption.withArgs("parseDOM").calledOnce, true, "getOption parseDOM is called");

@@ -53,6 +53,7 @@ function loadOptions() {
         break;
       }
     }
+    document.getElementById("rps").value = options.rps;
   });
 }
 
@@ -64,6 +65,7 @@ function saveOptions() {
     // Save selected options to localstore
     bkg.setItem("blacklist", blacklistEntries.value);
     bkg.setItem("checkType", requestType.children[requestType.selectedIndex].value);
+    bkg.setItem("rps", document.getElementById("rps").value);
 
     if (document.getElementById("cache").checked) { bkg.setItem("cache", 'true'); } else { bkg.setItem("cache", 'false'); }
     if (document.getElementById("noFollow").checked) { bkg.setItem("noFollow", 'true'); } else { bkg.setItem("noFollow", 'false'); }

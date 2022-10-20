@@ -26,6 +26,10 @@
 		<p>HEAD is quicker, but sometimes doesn't reflect the true HTTP status of a page, use GET if you're getting weird results.  GET is required to be able to parse the document for an element corresponding to what is after the hashtag by ID.</p>
 
 		<hr/>
+		<label for="rps">Requests per second: </label>
+		<input type="number" name="rps" id="rps" min="0" max="100" value="30" />
+		<p>0 means no limit.</p>
+		<hr />
 		<label for="autoCheck">AutoCheck: </label> <input type="checkbox" name="autoCheck" id="autoCheck" value="1">
 		<p>When enabled, if the url of the current tab changes and the page is loaded, it will automatically be checked. Valid link caching is recommended when this is enabled.</p>
 		<h3>Warnings</h3>

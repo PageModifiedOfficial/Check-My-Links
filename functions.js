@@ -221,11 +221,12 @@ function shouldDOMbeParsed(url, parseDOMoption, checkTypeOption) {
 // Timeout for each link is 30+1 seconds
 var timeout = 30000;
 
-function check(url) {
+function doCheck(url) {
     var response = { status: null, document: null };
     return new Promise(function (resolve, reject) {
         var XMLHttpTimeout = null;
         var xhr = new XMLHttpRequest();
+        var start = Date.now();
         xhr.onreadystatechange = function (data) {
             if (xhr.readyState == 4) {
                 log(xhr);
@@ -241,6 +242,7 @@ function check(url) {
                 } else {
                     response.status = 300;
                 }
+                response.cost = Date.now() - start;
                 resolve(response);
             }
         };
@@ -251,14 +253,66 @@ function check(url) {
         } catch (e) {
             console.log(e);
             response.status = 0;
+            response.cost = Date.now() - start;
             resolve(response);
         }
         XMLHttpTimeout = setTimeout(function () {
             response.status = 408;
+            response.cost = Date.now() - start;
             resolve(response);
             xhr.abort();
         }, timeout += 1000);
     });
+}
+
+var urls = [];
+
+var running = 0;
+
+function check(url) {
+    const rps = Number(getOption("rps"));
+    if (isNaN(rps) || rps <= 0) {
+        return doCheck(url);
+    }
+    return new Promise((resolve, reject) => {
+        this.urls.push({
+            resolve,
+            reject,
+            url
+        });
+        this.checkNext(rps);
+    });
+}
+
+function checkNext(rps) {
+    if (this.urls.length && this.running < rps) {
+        let {resolve, reject, url} = this.urls.shift();
+        this.running++;
+        doCheck(url)
+            .then(response => {
+                try {
+                    resolve(response);
+                } finally {
+                    this.running--;
+                    const timeout = 1000 - response.cost;
+                    if (timeout > 0) {
+                        setTimeout(() => {
+                            checkNext(rps);
+                        }, timeout);
+                    } else {
+                        checkNext(rps);
+                    }
+                }
+            })
+            .catch(error => {
+                try {
+                    reject(error);
+                } finally {
+                    this.running--;
+                    checkNext(rps);
+                }
+            });
+    }
 }
 
 function XHRisNecessary(options, url) {
@@ -362,6 +416,7 @@ function getOption(key) {
             "adservices.google.com\n" +
             "appliedsemantics.com",
         checkType: "GET",
+        rps: "30",
         cache: "false",
         noFollow: "false",
         parseDOM: "false",
@@ -398,6 +453,7 @@ function getOptions() {
     var options = {};
     options.blacklist = getOption("blacklist");
     options.checkType = getOption("checkType");
+    options.rps = getOption("rps");
     options.cache = getOption("cache");
     options.noFollow = getOption("noFollow");
     options.parseDOM = getOption("parseDOM");
