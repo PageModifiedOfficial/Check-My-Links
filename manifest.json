@@ -12,7 +12,7 @@
   "permissions": [
     "activeTab"
   ],
-  "version": "3.8.2",
+  "version": "3.8.2.1020",
   "manifest_version": 2,
   "background": {
     "scripts": [
